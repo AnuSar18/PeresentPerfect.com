@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interests - PresentPerfect.com</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Calibri, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            position: relative;
+        }
+
+        .logo {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3em;
+            color: #d648b3;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .back-button {
+            font-size: 1em;
+            text-decoration: none;
+            color: black;
+            border: 2px solid #496590;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            position: absolute;
+            left: 20px;
+        }
+
+        .back-button:hover {
+            background-color: #496590;
+            color: #496590;
+        }
+
+        .bar {
+            background-color: #d648b3;
+            padding: 10px;
+            margin: 20px auto;
+            width: 100%;
+            border-radius: 5px;
+        }
+
+        .bar h1 {
+            color: white;
+            margin: 0;
+            font-size: 1.5em;
+        }
+
+        .interests {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .interest-row {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .interest {
+            background-color: #f2c6e2;
+            border-radius: 50%;
+            width: 228px;
+            height: 228px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 10px;
+            flex-direction: column;
+            transition: transform 0.3s;
+            text-decoration: none;
+        }
+
+        .interest:hover {
+            transform: scale(1.1);
+        }
+
+        .interest i {
+            font-size: 3.2em;
+            color: #d648b3;
+        }
+
+        .interest p {
+            margin: 0;
+            color: white;
+            font-weight: bold;
+            font-size: 1.6em;
+        }
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 6px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            z-index: 1000;
+        }
+        @keyframes slideFooter {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        .footer-text {
+            display: inline-block;
+            padding-left: 100%;
+            animation: slideFooter 55s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="startpg.html" class="back-button">Back</a>
+        <div class="logo">presentperfect.com</div>
+    </div>
+    <div class="bar">
+        <h1>Explore Your Interests</h1>
+    </div>
+    <div class="interests">
+        <div class="interest-row">
+            <a href="sports.html" class="interest">
+                <i class="fas fa-futbol"></i>
+                <p>Sports</p>
+            </a>
+            <a href="music.html" class="interest">
+                <i class="fas fa-music"></i>
+                <p>Music</p>
+            </a>
+            <a href="art.html" class="interest">
+                <i class="fas fa-paint-brush"></i>
+                <p>Art</p>
+            </a>
+        </div>
+        <div class="interest-row">
+            <a href="beauty.html" class="interest">
+                <i class="fas fa-spa"></i>
+                <p>Beauty</p>
+            </a>
+            <a href="food.html" class="interest">
+                <i class="fas fa-utensils"></i>
+                <p>Food & Kitchen</p>
+            </a>
+        </div>
+    </div>
+</div>
+    <div class="footer">
+        <div class="footer-text">2024 PresentPerfect.com - All rights reserved. &nbsp; Made with the purpose of a project competition. &nbsp; Estd. in 2024 by some students of Fr. Conceicao Rodrigues Institute of Technology. &nbsp; Refunds not accepted. &nbsp; For any enquiry, contact 0123456789.</div>
+    </div>
+</body>
+</html>

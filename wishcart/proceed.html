@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proceed - PresentPerfect</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        .header-bar {
+            background-color: #ff80ab;
+            color: white;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .back-button {
+            position: absolute;
+            left: 10px;
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            background-color: rgba(232, 223, 230, 0.2);
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .confirmation-container {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .order-summary {
+            margin-top: 20px;
+            font-size: 18px;
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            text-align: left;
+        }
+
+        .total-amount {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .finalize-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .finalize-button:hover {
+            background-color: #4cae4c;
+        }
+
+        .payment-options, .address-section, .discount-section, .payment-details {
+            margin-top: 20px;
+            text-align: left;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .payment-options label, .address-section label, .discount-section label, .payment-details label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .payment-options input[type="radio"], .discount-section input[type="text"], .address-section input[type="text"], .address-section textarea {
+            margin-bottom: 15px;
+            padding: 10px;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .address-section textarea {
+            resize: none;
+        }
+
+        .payment-details input[type="text"] {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .order-success {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #dff0d8;
+            border-color: #d6e9c6;
+            color: #3c763d;
+            border-radius: 5px;
+            text-align: left;
+        }
+
+        .order-success h2 {
+            margin-top: 0;
+        }
+
+        .order-success .icon {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .order-success .icon .tick {
+            font-size: 24px;
+            color: #4cae4c;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-bar">
+        <a href="D:\ProComp\wishcart\cart.html" class="back-button">← Back to Cart</a>
+        <span class="title">Proceed - PresentPerfect.com</span>
+    </div>
+
+    <div class="confirmation-container">
+        <h2>Order Confirmation</h2>
+        <p>Thank you for your order! Please review and provide the following details:</p>
+
+        <div class="order-summary" id="order-summary">
+            <!-- Order details will be dynamically added here -->
+        </div>
+
+        <div class="payment-options">
+            <h3>Payment Options</h3>
+            <label><input type="radio" name="payment-method" value="cod" onclick="displayPaymentDetails()"> Cash on Delivery</label>
+            <label><input type="radio" name="payment-method" value="net-banking" onclick="displayPaymentDetails()"> Net Banking</label>
+            <label><input type="radio" name="payment-method" value="e-wallet" onclick="displayPaymentDetails()"> E-Wallet</label>
+            <label><input type="radio" name="payment-method" value="debit-card" onclick="displayPaymentDetails()"> Debit Card</label>
+            <label><input type="radio" name="payment-method" value="credit-card" onclick="displayPaymentDetails()"> Credit Card</label>
+            <label><input type="radio" name="payment-method" value="emi" onclick="displayPaymentDetails()"> EMI</label>
+            <label><input type="radio" name="payment-method" value="upi" onclick="displayPaymentDetails()"> UPI</label>
+            <label><input type="radio" name="payment-method" value="razorpay" onclick="displayPaymentDetails()"> Razorpay</label>
+        </div>
+
+        <div class="payment-details" id="payment-details" style="display: none;">
+            <!-- Payment method specific details will be dynamically added here -->
+        </div>
+
+        <div class="address-section">
+            <h3>Shipping Address</h3>
+            <label for="email">Email Address:</label>
+            <input type="text" id="email" name="email">
+            <label for="address">Address:</label>
+            <textarea id="address" name="address"></textarea>
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city">
+            <label for="state">State:</label>
+            <input type="text" id="state" name="state">
+            <label for="zipcode">Zip Code:</label>
+            <input type="text" id="zipcode" name="zipcode">
+        </div>
+
+        <div class="discount-section">
+            <h3>Apply Coupons/Vouchers</h3>
+            <label for="coupon">Coupon Code:</label>
+            <input type="text" id="coupon" name="coupon">
+        </div>
+
+        <button class="finalize-button" onclick="finalizeOrder()">Finalize Order</button>
+    </div>
+
+    <div class="order-success" id="order-success" style="display: none;">
+        <div class="icon">
+            <span class="tick">✔</span>
+            <h2>Your order has been placed!</h2>
+        </div>
+        <div id="order-details">
+            <!-- Final order details will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        function displayOrderSummary() {
+            const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            const orderSummary = document.getElementById('order-summary');
+            orderSummary.innerHTML = ''; // Clear previous order summary
+
+            let totalAmount = 0;
+
+            cartItems.forEach(item => {
+                const orderItem = document.createElement('div');
+                orderItem.innerHTML = `
+                    <strong>${item.name}</strong> - Rs ${item.price}
+                `;
+                orderSummary.appendChild(orderItem);
+                totalAmount += item.price;
+            });
+
+            const totalElement = document.createElement('div');
+            totalElement.className = 'total-amount';
+            totalElement.innerText = `Total Payable Amount: Rs ${totalAmount}`;
+            orderSummary.appendChild(totalElement);
+        }
+
+        function displayPaymentDetails() {
+            const paymentMethod = document.querySelector('input[name="payment-method"]:checked').value;
+            const paymentDetails = document.getElementById('payment-details');
+            paymentDetails.innerHTML = ''; // Clear previous payment details
+            paymentDetails.style.display = 'block';
+
+            if (paymentMethod === 'net-banking') {
+                paymentDetails.innerHTML = `
+                    <label for="bank-name">Bank Name:</label>
+                    <input type="text" id="bank-name" name="bank-name">
+                    <label for="account-number">Account Number:</label>
+                    <input type="text" id="account-number" name="account-number">
+                    <label for="ifsc-code">IFSC Code:</label>
+                    <input type="text" id="ifsc-code" name="ifsc-code">
+                `;
+            } else if (paymentMethod === 'e-wallet') {
+                paymentDetails.innerHTML = `
+                    <label for="wallet-id">Wallet ID:</label>
+                    <input type="text" id="wallet-id" name="wallet-id">
+                `;
+            } else if (paymentMethod === 'debit-card' || paymentMethod === 'credit-card') {
+                paymentDetails.innerHTML = `
+                    <label for="card-number">Card Number:</label>
+                    <input type="text" id="card-number" name="card-number">
+                    <label for="expiry-date">Expiry Date:</label>
+                    <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/YY">
+                    <label for="cvv">CVV:</label>
+                    <input type="text" id="cvv" name="cvv">
+                `;
+            } else if (paymentMethod === 'emi') {
+                paymentDetails.innerHTML = `
+                    <label for="emi-bank-name">Bank Name:</label>
+                    <input type="text" id="emi-bank-name" name="emi-bank-name">
+                    <label for="emi-account-number">Account Number:</label>
+                    <input type="text" id="emi-account-number" name="emi-account-number">
+                    <label for="emi-ifsc-code">IFSC Code:</label>
+                    <input type="text" id="emi-ifsc-code" name="emi-ifsc-code">
+                `;
+            } else if (paymentMethod === 'upi') {
+                paymentDetails.innerHTML = `
+                    <label for="upi-id">UPI ID:</label>
+                    <input type="text" id="upi-id" name="upi-id">
+                `;
+            } else if (paymentMethod === 'razorpay') {
+                paymentDetails.innerHTML = `
+                    <label for="razorpay-id">Razorpay ID:</label>
+                    <input type="text" id="razorpay-id" name="razorpay-id">
+                `;
+            }
+        }
+
+        function finalizeOrder() {
+            const email = document.getElementById('email').value;
+            const address = document.getElementById('address').value;
+            const city = document.getElementById('city').value;
+            const state = document.getElementById('state').value;
+            const zipcode = document.getElementById('zipcode').value;
+            const paymentMethod = document.querySelector('input[name="payment-method"]:checked')?.value;
+            const coupon = document.getElementById('coupon').value;
+
+            const paymentDetails = {};
+            if (paymentMethod === 'net-banking') {
+                paymentDetails.bankName = document.getElementById('bank-name').value;
+                paymentDetails.accountNumber = document.getElementById('account-number').value;
+                paymentDetails.ifscCode = document.getElementById('ifsc-code').value;
+            } else if (paymentMethod === 'e-wallet') {
+                paymentDetails.walletId = document.getElementById('wallet-id').value;
+            } else if (paymentMethod === 'debit-card' || paymentMethod === 'credit-card') {
+                paymentDetails.cardNumber = document.getElementById('card-number').value;
+                paymentDetails.expiryDate = document.getElementById('expiry-date').value;
+                paymentDetails.cvv = document.getElementById('cvv').value;
+            } else if (paymentMethod === 'emi') {
+                paymentDetails.bankName = document.getElementById('emi-bank-name').value;
+                paymentDetails.accountNumber = document.getElementById('emi-account-number').value;
+                paymentDetails.ifscCode = document.getElementById('emi-ifsc-code').value;
+            } else if (paymentMethod === 'upi') {
+                paymentDetails.upiId = document.getElementById('upi-id').value;
+            } else if (paymentMethod === 'razorpay') {
+                paymentDetails.razorpayId = document.getElementById('razorpay-id').value;
+            }
+
+            if (!email || !address || !city || !state || !zipcode || !paymentMethod) {
+                alert("Please fill in all required fields.");
+                return;
+            }
+
+            const userInfo = {
+                email,
+                address,
+                city,
+                state,
+                zipcode,
+                paymentMethod,
+                coupon,
+                paymentDetails
+            };
+
+            localStorage.setItem('userInfo', JSON.stringify(userInfo));
+
+            displayOrderSuccess(userInfo);
+        }
+
+        function displayOrderSuccess(userInfo) {
+            const orderSuccess = document.getElementById('order-success');
+            const orderDetails = document.getElementById('order-details');
+            orderDetails.innerHTML = ''; // Clear previous details
+
+            const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+            const emailElement = document.createElement('div');
+            emailElement.innerHTML = `<strong>Email:</strong> ${userInfo.email}`;
+            orderDetails.appendChild(emailElement);
+
+            const addressElement = document.createElement('div');
+            addressElement.innerHTML = `<strong>Address:</strong> ${userInfo.address}, ${userInfo.city}, ${userInfo.state}, ${userInfo.zipcode}`;
+            orderDetails.appendChild(addressElement);
+
+            const paymentElement = document.createElement('div');
+            paymentElement.innerHTML = `<strong>Payment Method:</strong> ${userInfo.paymentMethod}`;
+            orderDetails.appendChild(paymentElement);
+
+            const couponElement = document.createElement('div');
+            couponElement.innerHTML = `<strong>Coupon:</strong> ${userInfo.coupon}`;
+            orderDetails.appendChild(couponElement);
+
+            cartItems.forEach(item => {
+                const orderItem = document.createElement('div');
+                orderItem.innerHTML = `<strong>Product:</strong> ${item.name} - Rs ${item.price}`;
+                orderDetails.appendChild(orderItem);
+            });
+
+            const totalElement = document.createElement('div');
+            totalElement.className = 'total-amount';
+            totalElement.innerText = `Total Payable Amount: Rs ${cartItems.reduce((total, item) => total + item.price, 0)}`;
+            orderDetails.appendChild(totalElement);
+
+            orderSuccess.style.display = 'block';
+        }
+
+        displayOrderSummary();
+    </script>
+</body>
+</html>

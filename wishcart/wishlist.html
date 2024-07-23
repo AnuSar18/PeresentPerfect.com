@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist - PresentPerfect.com</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+        }
+        .header {
+            background-color: #ff80ab;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            font-size: 24px;
+            position: relative;
+        }
+        .back-button {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background-color: #d64161; /* Dark pink color */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        .back-button:hover {
+            background-color: #b62e4e; /* Darker shade on hover */
+        }
+        .wishlist-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+        .product {
+            width: 220px;
+            height: 220px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            position: relative;
+        }
+        .product:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        .product img {
+            width: 60%;
+            height: 150px;
+            object-fit: cover;
+        }
+        .product-name {
+            padding: 10px;
+            font-size: 16px;
+            color: #0a0a0a;
+        }
+        .remove-button {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: #f44336; /* Red color */
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .remove-button:hover {
+            background-color: #d32f2f; /* Darker shade on hover */
+        }
+        .empty-message {
+            text-align: center;
+            padding: 20px;
+            font-size: 18px;
+            color: #888;
+        }
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 4px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            z-index: 1000;
+        }
+        @keyframes slideFooter {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        .footer-text {
+            display: inline-block;
+            padding-left: 100%;
+            animation: slideFooter 55s linear infinite;
+        }
+        .clear-button {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .clear-button:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <button class="back-button" onclick="goBack()">Back</button>
+        Wishlist - PresentPerfect.com
+    </div>
+    
+    <!-- Wishlist Items Section -->
+    <div class="wishlist-container" id="wishlistContainer">
+        <!-- This container remains empty until items are added -->
+    </div>
+
+    <!-- Clear Wishlist Button -->
+    <button class="clear-button" onclick="clearWishlist()">Clear Wishlist</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Retrieve wishlist items from local storage
+            let wishlistItems = JSON.parse(localStorage.getItem('wishlistItems')) || [];
+
+            // Get wishlist container
+            let wishlistContainer = document.getElementById('wishlistContainer');
+
+            // Clear existing content to prevent duplication
+            wishlistContainer.innerHTML = '';
+
+            // If wishlist is not empty, display items
+            if (wishlistItems.length > 0) {
+                wishlistItems.forEach(function(item, index) {
+                    let productHTML = `
+                        <div class="product">
+                            <img src="${item.image}" alt="Product Image">
+                            <div class="product-name">${item.name}</div>
+                            <button class="remove-button" onclick="removeFromWishlist(${index})">Remove from Wishlist</button>
+                        </div>
+                    `;
+                    wishlistContainer.innerHTML += productHTML;
+                });
+            } else {
+                // If wishlist is empty, display a message
+                wishlistContainer.innerHTML = '<div class="empty-message">Your wishlist is empty.</div>';
+            }
+        });
+
+        // Function to go back to startpg.html
+        function goBack() {
+            window.location.href = 'D:/ProComp/startpg.html';
+        }
+
+        // Function to remove item from wishlist
+        function removeFromWishlist(index) {
+            // Retrieve wishlist items from local storage
+            let wishlistItems = JSON.parse(localStorage.getItem('wishlistItems')) || [];
+
+            // Remove item at index
+            wishlistItems.splice(index, 1);
+
+            // Update local storage
+            localStorage.setItem('wishlistItems', JSON.stringify(wishlistItems));
+
+            // Reload the page to reflect changes
+            location.reload();
+        }
+
+        // Function to clear wishlist
+        function clearWishlist() {
+            // Clear local storage
+            localStorage.removeItem('wishlistItems');
+
+            // Reload the page to reflect changes
+            location.reload();
+        }
+    </script>
+    
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-text">2024 PresentPerfect.com - All rights reserved. &nbsp; Made with the purpose of a project competition. &nbsp; Estd. in 2024 by some students of Fr. Conceicao Rodrigues Institute of Technology. &nbsp; Refunds not accepted. &nbsp; For any enquiry, contact 0123456789.</div>
+    </div>
+</body>
+</html>

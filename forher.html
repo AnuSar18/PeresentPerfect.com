@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Her - PresentPerfect.com</title>
+    <style>
+        body {
+            font-family: 'Arial, sans-serif';
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #d648b3;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            position: relative;
+            font-size: 26px;
+        }
+        .back-button {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: white;
+            color: #ffb6c1;
+            border: none;
+            padding: 8px 10px;
+            cursor: pointer;
+            text-decoration: none;
+            border-radius: 5px;
+            width: 30px;
+            height: 20px;
+            font-size: 15px;
+        }
+        .back-button:hover {
+            background-color: #ff85c1;
+        }
+        .flip-card {
+            perspective: 1000px;
+            margin: 20px auto;
+            width: 300px;
+            height: 400px;
+            position: relative;
+            margin-left: 90px;
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            font-size: 1.2em;
+            color: #080808;
+            border-radius: 10px;
+            background-color: rgba(222, 220, 221, 0.8);
+            font-style: bold;
+        }
+        .flip-card-front img {
+            max-width: 70%;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        .flip-card-back {
+            transform: rotateY(180deg);
+            background-color: #ff69b4;
+            color: #fff;
+            padding: 20px;
+        }
+        .offer-timer {
+            margin-top: 20px;
+            font-size: 1.5em;
+        }
+        .shop-now-button {
+            background-color: #ff69b4;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        .shop-now-button:hover {
+            background-color: #ff85c1;
+        }
+        .products-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: -390px;
+            margin-left: 370px;
+        }
+        .product {
+            width: 300px;
+            margin: 10px;
+            text-align: center;
+        }
+        .product img {
+            max-width: 70%;
+            height: 70%;
+            border-radius: 10px;
+        }
+        .product-name {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .cart-icon, .favorite-icon {
+            width: 30px; /* Adjust the size as per your preference */
+            height: 30px;
+        }
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 6px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            z-index: 1000;
+        }
+        @keyframes slideFooter {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        .footer-text {
+            display: inline-block;
+            padding-left: 100%;
+            animation: slideFooter 55s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="startpg.html" class="back-button">Back</a>
+        For her - PresentPerfect.com
+    </div>
+
+    <div class="flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRSqlWEZDqS5i7lBb5RN0QFz6vdrZFBx0GVT4-ZtDGpnndtla_6WdBx6DzuagVr5YVsiPtEz4Q5Jv2AVoUiyz5DaUY-i3n61fKI0VXkv3V6&usqp=CAE" alt="Customized Bracelets">
+                <p>Special Offer on Customized Bracelets</p>
+                <div class="offer-timer" id="offer-timer">00:00:00</div>
+                <button class="shop-now-button" onclick="redirectToProduct()">Shop Now</button>
+            </div>
+            <div class="flip-card-back">
+                <h2>Exclusive Coupon</h2>
+                <p>Use coupon code <strong>HER2024</strong> to get 20% off on all customized bracelets!</p>
+                <p>Valid until July 31, 2024.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Products Section -->
+    <div class="products-container">
+        <!-- Product 1 -->
+        <div class="product">
+            <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSI61uPiHMxgb9cDseNjmO7WnijE60mUBgmGxCktJk7htRXEHzFhOcTGKkmrTQtrx47fG0zl3b1vqmC_Zw967NHtueiMQgFogyWdjzs_pcQT0oWuBmL8ZUJ&usqp=CAE" alt="Women handbag">
+            <div class="product-name">Women handbag</div>
+            <div>Rs 850</div>
+            <div class="product-icons">
+                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Women handbag', 850, 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSI61uPiHMxgb9cDseNjmO7WnijE60mUBgmGxCktJk7htRXEHzFhOcTGKkmrTQtrx47fG0zl3b1vqmC_Zw967NHtueiMQgFogyWdjzs_pcQT0oWuBmL8ZUJ&usqp=CAE')"></span>
+                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Women handbag', 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSI61uPiHMxgb9cDseNjmO7WnijE60mUBgmGxCktJk7htRXEHzFhOcTGKkmrTQtrx47fG0zl3b1vqmC_Zw967NHtueiMQgFogyWdjzs_pcQT0oWuBmL8ZUJ&usqp=CAE')"></span>
+            </div>       
+        </div>
+        <!-- Product 2 -->
+        <div class="product">
+            <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRZiiRjkM-pp01iBxTydXlbZyS0SPLlZALEvw2ZOZsJ3yhLq_j93zs3-8K7ItaF_iXtZGlR_Y92RsQPr8W9WSJu-2h4ETL5aZlYN9CMmJvs&usqp=CAE" alt="Gift hamper for her">
+            <div class="product-name">Gift hamper for her</div>
+            <div>Rs 1000</div>
+            <div class="product-icons">
+                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Gift hamper for her', 1000, 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRZiiRjkM-pp01iBxTydXlbZyS0SPLlZALEvw2ZOZsJ3yhLq_j93zs3-8K7ItaF_iXtZGlR_Y92RsQPr8W9WSJu-2h4ETL5aZlYN9CMmJvs&usqp=CAE')"></span>
+                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Gift hamper for her', 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRZiiRjkM-pp01iBxTydXlbZyS0SPLlZALEvw2ZOZsJ3yhLq_j93zs3-8K7ItaF_iXtZGlR_Y92RsQPr8W9WSJu-2h4ETL5aZlYN9CMmJvs&usqp=CAE')"></span>
+            </div>    
+        </div>
+        <!-- Product 3 -->
+        <div class="product">
+            <img src="https://m.media-amazon.com/images/I/911MXFLHjzL._AC_SX679_.jpg" alt="Ornament for women">
+            <div class="product-name">Ornament for women</div>
+            <div>Rs 900</div>
+            <div class="product-icons">
+                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Ornament for women', 900, 'https://m.media-amazon.com/images/I/911MXFLHjzL._AC_SX679_.jpg')"></span>
+                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Ornament for women', 'https://m.media-amazon.com/images/I/911MXFLHjzL._AC_SX679_.jpg')"></span>
+            </div>    
+        </div>
+        <!-- Product 4 -->
+        <div class="product">
+            <img src="https://m.media-amazon.com/images/I/410h2RsR1cL._AC_SR250,250_QL65_.jpg" alt="Customized water bottle">
+            <div class="product-name">Customized water bottle</div>
+            <div>Rs 499</div>
+            <div class="product-icons">
+                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Customized water bottle', 499, 'https://m.media-amazon.com/images/I/410h2RsR1cL._AC_SR250,250_QL65_.jpg')"></span>
+                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Customized water bottle', 'https://m.media-amazon.com/images/I/410h2RsR1cL._AC_SR250,250_QL65_.jpg')"></span>
+            </div>    
+        </div>
+        <!-- Product 5 -->
+        <div class="product">
+            <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcS4zXUR6taWvQeEhvk5D6XBYBpACTvTgm0mVPKnVkLQHhYqUCGmalD1e8y-5Jh4II7CneSlueJ2QChxijXj8ubtSC1Hzu9OwjpEMKizbf95&usqp=CAE" alt="Product 5">
+            <div class="product-name">customized-bracelets</div>
+            <div>Rs 230</div>
+            <div class="product-icons">
+                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('customized-bracelets', 230, 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcS4zXUR6taWvQeEhvk5D6XBYBpACTvTgm0mVPKnVkLQHhYqUCGmalD1e8y-5Jh4II7CneSlueJ2QChxijXj8ubtSC1Hzu9OwjpEMKizbf95&usqp=CAE')"></span>
+                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('customized-bracelets', 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcS4zXUR6taWvQeEhvk5D6XBYBpACTvTgm0mVPKnVkLQHhYqUCGmalD1e8y-5Jh4II7CneSlueJ2QChxijXj8ubtSC1Hzu9OwjpEMKizbf95&usqp=CAE')"></span>
+            </div>
+        </div>
+        <!-- Product 6 -->
+        <div class="product">
+            <img src="https://i.etsystatic.com/12195352/r/il/e85fb8/4303601618/il_570xN.4303601618_k6wj.jpg" alt="Product 6">
+            <div class="product-name">Custom Cellphone case</div>
+            <div>Rs 760</div>
+            <div class="product-icons">
+                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Custom Cellphone case', 760, 'https://i.etsystatic.com/12195352/r/il/e85fb8/4303601618/il_570xN.4303601618_k6wj.jpg')"></span>
+                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Custom Cellphone case', 'https://i.etsystatic.com/12195352/r/il/e85fb8/4303601618/il_570xN.4303601618_k6wj.jpg')"></span>
+            </div>
+        </div>
+        <!-- Product 7 -->
+        <div class="product">
+            <img src="https://i.etsystatic.com/12328946/r/il/d40179/4005537711/il_794xN.4005537711_mg3i.jpg" alt="Product 7">
+            <div class="product-name">Opal wood pendant</div>
+            <div>Rs 280</div>
+            <div class="product-icons">
+                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Opal wood pendant', 280, 'https://i.etsystatic.com/12328946/r/il/d40179/4005537711/il_794xN.4005537711_mg3i.jpg')"></span>
+                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Opal wood pendant', 'https://i.etsystatic.com/12328946/r/il/d40179/4005537711/il_794xN.4005537711_mg3i.jpg')"></span>
+            </div>
+        </div>
+        <!-- Product 8 -->
+        <div class="product">
+            <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcR41JoB3Oq1uS67QraDac_a5tuGG9q6UP4rBu4YAe0nh8UMn3LuEpM0xNerS63Sv7OPuck2A_5QzCmDaO_3azACkR4j3ivI9dzoLfM-_gukcz4ZaHCW6CCV6g&usqp=CAE" alt="Product 8">
+            <div class="product-name">make up gift set</div>
+            <div>Rs 2199</div>
+            <div class="product-icons">
+                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('make up gift set', 2199, 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcR41JoB3Oq1uS67QraDac_a5tuGG9q6UP4rBu4YAe0nh8UMn3LuEpM0xNerS63Sv7OPuck2A_5QzCmDaO_3azACkR4j3ivI9dzoLfM-_gukcz4ZaHCW6CCV6g&usqp=CAE')"></span>
+                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('make up gift set', 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcR41JoB3Oq1uS67QraDac_a5tuGG9q6UP4rBu4YAe0nh8UMn3LuEpM0xNerS63Sv7OPuck2A_5QzCmDaO_3azACkR4j3ivI9dzoLfM-_gukcz4ZaHCW6CCV6g&usqp=CAE')"></span>
+            </div>
+        </div>
+        <!-- Product 9 -->
+        <div class="product">
+            <img src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1660760618-screen-shot-2022-08-17-at-2-23-15-pm-1660760600.png?crop=0.719047619047619xw:1xh;center,top&resize=980:*" alt="Product 9">
+            <div class="product-name">Glamnetic Nail kit</div>
+            <div>Rs 1500</div>
+            <div class="product-icons">
+                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Glamnetic Nail kit', 1500, 'https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1660760618-screen-shot-2022-08-17-at-2-23-15-pm-1660760600.png?crop=0.719047619047619xw:1xh;center,top&resize=980:*')"></span>
+                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Glamnetic Nail kit', 'https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1660760618-screen-shot-2022-08-17-at-2-23-15-pm-1660760600.png?crop=0.719047619047619xw:1xh;center,top&resize=980:*')"></span>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="footer">
+        <div class="footer-text">For her - Great deals on amazing products! | PresentPerfect.com</div>
+    </div>
+
+    <script>
+        function addToCart(productName, productPrice, productImage) {
+            // Example: Store product in local storage for demo purposes
+            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            cartItems.push({ name: productName, price: productPrice, image: productImage });
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        
+            // Redirect to cart.html
+            window.location.href = 'D:/ProComp/wishcart/cart.html';
+        }
+
+        function addToWishlist(productName, productImage) {
+            // Get existing wishlist items from localStorage or initialize an empty array
+            var wishlistItems = JSON.parse(localStorage.getItem("wishlistItems")) || [];
+
+            // Add the new product to the wishlist
+            wishlistItems.push({ name: productName, image: productImage });
+
+            // Save the updated wishlist to localStorage
+            localStorage.setItem("wishlistItems", JSON.stringify(wishlistItems));
+
+            // Redirect to the wishlist page immediately
+            window.location.href = "D:/ProComp/wishcart/wishlist.html";
+        }
+
+        function redirectToProduct() {
+            // Logic to redirect to the product's page
+            window.location.href = "product.html"; // Replace with the actual URL of the product page
+        }
+
+        function startOfferTimer(duration, display) {
+            var timer = duration, minutes, seconds;
+            setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+                
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = "00:" + minutes + ":" + seconds;
+
+                if (--timer < 0) {
+                    timer = duration;
+                }
+            }, 1000);
+        }
+
+        window.onload = function () {
+            var fiveMinutes = 60 * 5,
+                display = document.querySelector('#offer-timer');
+            startOfferTimer(fiveMinutes, display);
+        };
+    </script>
+</body>
+</html>

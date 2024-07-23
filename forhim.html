@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Him - PresentPerfect.com</title>
+    <style>
+        body {
+            font-family: 'Arial, sans-serif';
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #d648b3;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            position: relative;
+            font-size: 26px;
+        }
+        .back-button {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: white;
+            color: #ffb6c1;
+            border: none;
+            padding: 8px 10px;
+            cursor: pointer;
+            text-decoration: none;
+            border-radius: 5px;
+            width: 30px;
+            height: 20px;
+            font-size: 15px;
+        }
+        .back-button:hover {
+            background-color: #ff85c1;
+        }
+        
+        .products-container {
+            display: flex;
+            justify-content: left;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            margin-left: 30px;
+            gap: 40px;
+        }
+        .product {
+            width: 300px;
+            margin: 10px;
+            text-align: center;
+        }
+        .product img {
+            max-width: 70%;
+            height: 70%;
+            border-radius: 10px;
+        }
+        .product-name {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            z-index: 1000;
+        }
+        @keyframes slideFooter {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        .footer-text {
+            display: inline-block;
+            padding-left: 100%;
+            animation: slideFooter 55s linear infinite;
+        }
+        
+        /* Popup Styles */
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 300px;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 2000;
+            display: none;
+        }
+        .popup h2 {
+            margin-top: 0;
+            font-size: 18px;
+        }
+        .popup button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            background: #d648b3;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .popup button:hover {
+            background: #ff85c1;
+        }
+        .popup .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: transparent;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .cart-icon, .favorite-icon {
+    width: 30px; /* Adjust the size as per your preference */
+    height: 30px;
+}
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="startpg.html" class="back-button">Back</a>
+        For him - PresentPerfect.com
+    </div>  
+    <!-- Products Section -->
+    <div class="products-container">
+        <!-- Product 1 -->
+        <div class="product">
+            <img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQg4zVQZ7g2nn3MP7R88gvRQ7FBdXhyFTygGKy26TgNkhvBAUHMgh82X4itbo-3sBUa2Z79Fw2PGukFFXveoffITVBpdAeaMiIBvzXoSs1nu53wMbc7YV0N0g&usqp=CAE" alt="Sunglasses">
+            <div class="product-name">Sunglasses</div>
+            <div>Rs 420</div>
+            <div class="product-icons">
+                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Sunglasses')"></span>
+                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Sunglasses')"></span>
+            </div>
+        </div>
+    
+        <!-- Product 2 -->
+        <div class="product">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxcFamaWCldb79Zl9H-l4kFUGYRKyq0ZCQUg&s" alt="Deodorants">
+            <div class="product-name">Deodorants</div>
+            <div>Rs 199</div>
+            <div class="product-icons">
+                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Deodorants', 199, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxcFamaWCldb79Zl9H-l4kFUGYRKyq0ZCQUg&s')"></span>
+                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Deodorants')"></span>
+            </div>
+        </div>
+    
+        <!-- Product 3 -->
+        <div class="product">
+            <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTcpVzzV5QMgRpYsJWRTDyM3CSCpzMDYr-eQAXVRD45wGBBKqmFp8DxkL2PMCtmk1BhCMWM7VR7Y-kUvbw9g5bIqrUUPDogvKgSYLfMEmwL&usqp=CAE" alt="Personalized men's bracelet">
+            <div class="product-name">Personalized men's bracelet</div>
+            <div>Rs 380</div>
+            <div class="product-icons">
+                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Personalized men\'s bracelet', 380, 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTcpVzzV5QMgRpYsJWRTDyM3CSCpzMDYr-eQAXVRD45wGBBKqmFp8DxkL2PMCtmk1BhCMWM7VR7Y-kUvbw9g5bIqrUUPDogvKgSYLfMEmwL&usqp=CAE')"></span>
+                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Personalized men\'s bracelet')"></span>
+            </div>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="product">
+            <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTEpjuDSU8SllkBw5vB2wqf8B4zozh6Kk9Ai5BhVsqV1Olf4BgaHLcq_aNyccH85iji2_006VI1rYt07o1Ng_p8J-9bsBoWwCMHCGArkGifsbjhQM6FEGIB7w&usqp=CAE" alt="Wrist watch">
+            <div class="product-name">Wrist watch</div>
+            <div>Rs 1299</div>
+            <div class="product-icons">
+                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Wrist watch', 1299, 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTEpjuDSU8SllkBw5vB2wqf8B4zozh6Kk9Ai5BhVsqV1Olf4BgaHLcq_aNyccH85iji2_006VI1rYt07o1Ng_p8J-9bsBoWwCMHCGArkGifsbjhQM6FEGIB7w&usqp=CAE')"></span>
+                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Wrist watch')"></span>
+            </div>
+        </div>
+    
+        <!-- Product 5 -->
+        <div class="product">
+            <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRpyT1TwdbhcGf9AMxq8Pn9DnzQMKNjPZliMMh-eNrEXbxgNifQC2JmRuLvcAUpk0u3p3FrnfeajAd6iN8FuPsMXA3AoZ-4yLwQnxM9ZtwnprmY43l8fAXe&usqp=CAE" alt="Gift hamper for him">
+            <div class="product-name">Gift hamper for him</div>
+            <div>Rs 2000</div>
+            <div class="product-icons">
+                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Gift hamper for him', 2000, 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRpyT1TwdbhcGf9AMxq8Pn9DnzQMKNjPZliMMh-eNrEXbxgNifQC2JmRuLvcAUpk0u3p3FrnfeajAd6iN8FuPsMXA3AoZ-4yLwQnxM9ZtwnprmY43l8fAXe&usqp=CAE')"></span>
+                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Gift hamper for him')"></span>
+            </div>
+        </div>
+    
+        <!-- Product 6 -->
+        <div class="product">
+            <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSXqqHwlb4mQbSxm7U9uV7VRybRo1qxQOpYarBPkmIHZvC_-s2_5-Uep1WyxU03AUPh-Iqvj3ybewU5dyRhk_jY6c2ezMZqr8RrVshfZQKkF81QxxHW5q0dGw&usqp=CAE" alt="Wallet">
+            <div class="product-name">Wallet</div>
+            <div>Rs 700</div>
+            <div class="product-icons">
+                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Wallet', 700, 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSXqqHwlb4mQbSxm7U9uV7VRybRo1qxQOpYarBPkmIHZvC_-s2_5-Uep1WyxU03AUPh-Iqvj3ybewU5dyRhk_jY6c2ezMZqr8RrVshfZQKkF81QxxHW5q0dGw&usqp=CAE')"></span>
+                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Wallet')"></span>
+            </div>
+        </div>
+    
+        <!-- Product 7 -->
+        <div class="product">
+            <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTR15Zkxbs7jNKdYwMEmDwnwYuwmRtLF-o_z_fKrmryB5kvAZ2VuTMtroiahhVdna1BTvRnAUGIGUWOolZuVYZZSadTet46u4Ss73q5JdWnDuuWKXUYYrBh&usqp=CAE" alt="Airpods">
+            <div class="product-name">Airpods</div>
+            <div>Rs 2999</div>
+            <div class="product-icons">
+                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Airpods', 2999, 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTR15Zkxbs7jNKdYwMEmDwnwYuwmRtLF-o_z_fKrmryB5kvAZ2VuTMtroiahhVdna1BTvRnAUGIGUWOolZuVYZZSadTet46u4Ss73q5JdWnDuuWKXUYYrBh&usqp=CAE')"></span>
+                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Airpods')"></span>
+            </div>
+        </div>
+    
+        <!-- Product 8 -->
+        <div class="product">
+            <img src="https://i.etsystatic.com/18407560/c/2079/1651/312/124/il/0592f4/5034795095/il_680x540.5034795095_lw4g.jpg" alt="Wooden phone stand">
+            <div class="product-name">Wooden phone stand</div>
+            <div>Rs 200</div>
+            <div class="product-icons">
+                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Wooden phone stand', 200, 'https://i.etsystatic.com/18407560/c/2079/1651/312/124/il/0592f4/5034795095/il_680x540.5034795095_lw4g.jpg')"></span>
+                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Wooden phone stand')"></span>
+            </div>
+        </div>
+    
+        <!-- Product 9 -->
+        <div class="product">
+            <img src="https://i.etsystatic.com/15446141/r/il/418d9f/5975375264/il_680x540.5975375264_ozt2.jpg" alt="Basketball keychains">
+            <div class="product-name">Basketball keychains</div>
+            <div>Rs 190</div>
+            <div class="product-icons">
+                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Basketball keychains', 190, 'https://i.etsystatic.com/15446141/r/il/418d9f/5975375264/il_680x540.5975375264_ozt2.jpg')"></span>
+                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Basketball keychains')"></span>
+            </div>
+        </div>
+    </div>     
+    <br><br>
+    <div class="footer">
+        <div class="footer-text">2024 PresentPerfect.com - All rights reserved. &nbsp; Made with the purpose of a project competition. &nbsp; Estd. in 2024 by some students of Fr. Conceicao Rodrigues Institute of Technology. &nbsp; Refunds not accepted. &nbsp; For any enquiry, contact 0123456789.</div>
+    </div>
+    
+    <!-- Popup Section -->
+    <div class="popup" id="giftPopup">
+        <button class="close" onclick="closePopup()">×</button>
+        <h2>What types of gifts are you most interested in for him?</h2>
+        <button onclick="submitResponse('Clothing')">Clothing</button>
+        <button onclick="submitResponse('Accessories')">Accessories</button>
+        <button onclick="submitResponse('Gadgets')">Gadgets</button>
+        <button onclick="submitResponse('Self-care items')">Self-care items</button>
+    </div>
+
+    <script>
+        // Function to open the popup
+        function openPopup() {
+            document.getElementById('giftPopup').style.display = 'block';
+        }
+
+        // Function to close the popup
+        function closePopup() {
+            document.getElementById('giftPopup').style.display = 'none';
+        }
+
+        // Function to submit the response and show thank you message
+        function submitResponse(option) {
+            alert('Thank you for your response!');
+            closePopup();
+        }
+
+        // Open the popup after a delay (e.g., 2 seconds)
+        setTimeout(openPopup, 2000);
+        function addToCart(productName, productPrice, productImage) {
+            // Example: Store product in local storage for demo purposes
+            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            cartItems.push({ name: productName, price: productPrice, image: productImage });
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        
+            // Redirect to cart.html
+            window.location.href = 'D:/ProComp/wishcart/cart.html';
+        }
+function addToWishlist(productName) {
+    // Define product images (you may need to adjust these to match the actual images)
+    const productImages = {
+        'Sunglasses': 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQg4zVQZ7g2nn3MP7R88gvRQ7FBdXhyFTygGKy26TgNkhvBAUHMgh82X4itbo-3sBUa2Z79Fw2PGukFFXveoffITVBpdAeaMiIBvzXoSs1nu53wMbc7YV0N0g&usqp=CAE',
+        'Deodorants': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxcFamaWCldb79Zl9H-l4kFUGYRKyq0ZCQUg&s',
+        'Personalized men\'s bracelet': 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTcpVzzV5QMgRpYsJWRTDyM3CSCpzMDYr-eQAXVRD45wGBBKqmFp8DxkL2PMCtmk1BhCMWM7VR7Y-kUvbw9g5bIqrUUPDogvKgSYLfMEmwL&usqp=CAE',
+        'Wrist watch': 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTEpjuDSU8SllkBw5vB2wqf8B4zozh6Kk9Ai5BhVsqV1Olf4BgaHLcq_aNyccH85iji2_006VI1rYt07o1Ng_p8J-9bsBoWwCMHCGArkGifsbjhQM6FEGIB7w&usqp=CAE',
+        'Gift hamper for him': 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRpyT1TwdbhcGf9AMxq8Pn9DnzQMKNjPZliMMh-eNrEXbxgNifQC2JmRuLvcAUpk0u3p3FrnfeajAd6iN8FuPsMXA3AoZ-4yLwQnxM9ZtwnprmY43l8fAXe&usqp=CAE',
+        'Wallet': 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSXqqHwlb4mQbSxm7U9uV7VRybRo1qxQOpYarBPkmIHZvC_-s2_5-Uep1WyxU03AUPh-Iqvj3ybewU5dyRhk_jY6c2ezMZqr8RrVshfZQKkF81QxxHW5q0dGw&usqp=CAE',
+        'Airpods': 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTR15Zkxbs7jNKdYwMEmDwnwYuwmRtLF-o_z_fKrmryB5kvAZ2VuTMtroiahhVdna1BTvRnAUGIGUWOolZuVYZZSadTet46u4Ss73q5JdWnDuuWKXUYYrBh&usqp=CAE',
+        'Wooden phone stand': 'https://i.etsystatic.com/18407560/c/2079/1651/312/124/il/0592f4/5034795095/il_680x540.5034795095_lw4g.jpg',
+        'Basketball keychains': 'https://i.etsystatic.com/15446141/r/il/418d9f/5975375264/il_680x540.5975375264_ozt2.jpg'
+    };
+
+    // Example: Store product in local storage for demo purposes
+    let wishlistItems = JSON.parse(localStorage.getItem('wishlistItems')) || [];
+    wishlistItems.push({ name: productName, image: productImages[productName] });
+    localStorage.setItem('wishlistItems', JSON.stringify(wishlistItems));
+
+    // Redirect to wishlist.html
+    window.location.href = 'D:/ProComp/wishcart/wishlist.html';
+}
+
+    </script>
+     
+</body>
+</html>

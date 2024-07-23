@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthdays - PresentPerfect</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .header-bar {
+            background-color: #ff80ab;
+            color: white;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .back-button {
+            position: absolute;
+            left: 10px;
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            background-color: rgba(232, 223, 230, 0.2);
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .birthday-coupon-box {
+            margin: 20px 0;
+            padding: 15px;
+            border: 2px dashed #f0ad4e;
+            border-radius: 5px;
+            background-color: #fff3cd;
+            text-align: center;
+        }
+
+        .birthday-coupon-box h3 {
+            font-size: 24px;
+            color: #f0ad4e;
+            margin-bottom: 10px;
+        }
+
+        .birthday-coupon-box form {
+            display: inline-block;
+        }
+
+        .birthday-coupon-box input[type="text"] {
+            padding: 8px;
+            width: 200px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            margin-right: 5px;
+        }
+
+        .birthday-coupon-box button {
+            padding: 8px 20px;
+            background-color: #f0ad4e;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .birthday-coupon-box button:hover {
+            background-color: #eea236;
+        }
+
+        .birthday-coupon-box p {
+            font-size: 14px;
+            color: #888;
+        }
+
+        /* Product grid styles */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .product-item {
+            text-align: center;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .product-item img {
+            max-width: 50%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .product-item h4 {
+            margin-top: 10px;
+            font-size: 16px;
+        }
+
+        /* Pop-up message styles */
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8); /* Black background */
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            display: none;
+            z-index: 1000;
+            text-align: center;
+        }
+        .cart-icon, .favorite-icon {
+    width: 20px; /* Adjust the size as per your preference */
+    height: 20px;
+}
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            z-index: 1000;
+        }
+        @keyframes slideFooter {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        .footer-text {
+            display: inline-block;
+            padding-left: 100%;
+            animation: slideFooter 55s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-bar">
+        <a href="startpg.html" class="back-button">← Back</a>
+        <span class="title">Birthdays - PresentPerfect.com</span>
+    </div>
+
+    <div class="birthday-coupon-box">
+        <h3>Birthday Discount</h3>
+        <form action="#" method="post" id="coupon-form">
+            <input type="text" id="birthday-coupon-code" name="birthday-coupon-code" placeholder="Enter birthday coupon code">
+            <button type="submit">Apply</button>
+        </form>
+        <p>Get 10% off on birthday gifts! Enter your coupon code to redeem.</p>
+    </div>
+
+    <!-- Product grid section -->
+    <div class="product-grid">
+        <div class="product-item">
+            <img src="https://th.bing.com/th?id=OPAC.T8IqJwmSGeMexw474C474&w=592&h=550&o=5&dpr=1.3&pid=21.1" alt="Product 1">
+            <h4>Birthday Hamper</h4>
+            <div>Rs 559</div>
+            <div class="product-icons">
+                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Birthday Hamper', 559, 'https://th.bing.com/th?id=OPAC.T8IqJwmSGeMexw474C474&w=592&h=550&o=5&dpr=1.3&pid=21.1')"></span>
+                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Birthday Hamper', 'https://th.bing.com/th?id=OPAC.T8IqJwmSGeMexw474C474&w=592&h=550&o=5&dpr=1.3&pid=21.1')"></span>
+            </div>
+        </div>
+        <div class="product-item">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHXa9B34FP1DJug8jzU1rzxMw4jkboX8PjvA&s" alt="Product 2">
+            <h4>Rings</h4>
+            <div>Rs 700</div>
+            <div class="product-icons">
+                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Rings', 700, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHXa9B34FP1DJug8jzU1rzxMw4jkboX8PjvA&s')"></span>
+                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Rings', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHXa9B34FP1DJug8jzU1rzxMw4jkboX8PjvA&s')"></span>
+            </div>
+        </div>
+        <div class="product-item">
+            <img src="https://i.etsystatic.com/50093064/r/il/e11aba/5819714115/il_794xN.5819714115_r4po.jpg" alt="Product 3">
+            <h4>personalized wooden stand</h4>
+            <div>Rs 1600</div>
+            <div class="product-icons">
+                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('personalized wooden stand', 1600, 'https://i.etsystatic.com/50093064/r/il/e11aba/5819714115/il_794xN.5819714115_r4po.jpg')"></span>
+                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('personalized wooden stand', 'https://i.etsystatic.com/50093064/r/il/e11aba/5819714115/il_794xN.5819714115_r4po.jpg')"></span>
+            </div>
+        </div>
+        <div class="product-item">
+            <img src="https://i.etsystatic.com/45926271/r/il/276282/6112826288/il_340x270.6112826288_fu97.jpg" alt="Product 4">
+            <h4>Stuffed Toy</h4>
+            <div>Rs 1000</div>
+            <div class="product-icons">
+                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Stuffed Toy', 1000, 'https://i.etsystatic.com/45926271/r/il/276282/6112826288/il_340x270.6112826288_fu97.jpg')"></span>
+                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Stuffed Toy', 'https://i.etsystatic.com/45926271/r/il/276282/6112826288/il_340x270.6112826288_fu97.jpg')"></span>
+            </div>
+        </div>
+        <div class="product-item">
+            <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSJ6jI85JyP7IIGbjS2akRne-btey1D7K4jd3U0eY79qKHeQczxTif1HTo1wC4EFJmypq_M7Q36R7p6Yqq9jHZDzA5I-g38ThhWtIY9F9YRtg2zkgYcocU97A&usqp=CAE" alt="Product 5">
+            <h4>Casio Mens Watch</h4>
+            <div>Rs 2800</div>
+            <div class="product-icons">
+                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Casio Mens Watch', 2800, 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSJ6jI85JyP7IIGbjS2akRne-btey1D7K4jd3U0eY79qKHeQczxTif1HTo1wC4EFJmypq_M7Q36R7p6Yqq9jHZDzA5I-g38ThhWtIY9F9YRtg2zkgYcocU97A&usqp=CAE')"></span>
+                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Casio Mens Watch', 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSJ6jI85JyP7IIGbjS2akRne-btey1D7K4jd3U0eY79qKHeQczxTif1HTo1wC4EFJmypq_M7Q36R7p6Yqq9jHZDzA5I-g38ThhWtIY9F9YRtg2zkgYcocU97A&usqp=CAE')"></span>
+            </div>
+        </div>
+        <div class="product-item">
+            <img src="https://i.etsystatic.com/35343973/r/il/b56cef/4711478820/il_794xN.4711478820_phfs.jpg" alt="Product 6">
+            <h4>Personalized mini purses</h4>
+            <div>Rs 760</div>
+            <div class="product-icons">
+                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Personalized mini purses', 760, 'https://i.etsystatic.com/35343973/r/il/b56cef/4711478820/il_794xN.4711478820_phfs.jpg')"></span>
+                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Personalized mini purses', 'https://i.etsystatic.com/35343973/r/il/b56cef/4711478820/il_794xN.4711478820_phfs.jpg')"></span>
+            </div>
+        </div>
+        <div class="product-item">
+            <img src="https://i.etsystatic.com/53097231/r/il/83c18d/6107410054/il_340x270.6107410054_gc50.jpg" alt="Product 7">
+            <h4>Woolen shawl</h4>
+            <div>Rs 1200</div>
+            <div class="product-icons">
+                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Woolen shawl', 1200, 'https://i.etsystatic.com/53097231/r/il/83c18d/6107410054/il_340x270.6107410054_gc50.jpg')"></span>
+                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Woolen shawl', 'https://i.etsystatic.com/53097231/r/il/83c18d/6107410054/il_340x270.6107410054_gc50.jpg')"></span>
+            </div>
+        </div>
+        <div class="product-item">
+            <img src="https://i.etsystatic.com/18450128/r/il/554470/4273841349/il_570xN.4273841349_qwae.jpg" alt="Product 8">
+            <h4>Personalized mens sunglasses</h4>
+            <div>Rs 1400</div>
+            <div class="product-icons">
+                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Personalized mens sunglasses', 1400, 'https://i.etsystatic.com/18450128/r/il/554470/4273841349/il_570xN.4273841349_qwae.jpg')"></span>
+                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Personalized mens sunglasses', 'https://i.etsystatic.com/18450128/r/il/554470/4273841349/il_570xN.4273841349_qwae.jpg')"></span>
+            </div>
+        </div>
+        <div class="product-item">
+            <img src="https://i.etsystatic.com/50575031/r/il/0a8ef0/5996444506/il_340x270.5996444506_sde0.jpg" alt="Product 9">
+            <h4>Personalized keychains</h4>
+            <div>Rs 400</div>
+            <div class="product-icons">
+                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Personalized keychains', 400, 'https://i.etsystatic.com/50575031/r/il/0a8ef0/5996444506/il_340x270.5996444506_sde0.jpg')"></span>
+                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Personalized keychains', 'https://i.etsystatic.com/50575031/r/il/0a8ef0/5996444506/il_340x270.5996444506_sde0.jpg')"></span>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer-text">2024 PresentPerfect.com - All rights reserved. &nbsp; Made with the purpose of a project competition. &nbsp; Estd. in 2024 by some students of Fr. Conceicao Rodrigues Institute of Technology. &nbsp; Refunds not accepted. &nbsp; For any enquiry, contact 0123456789.</div>
+    </div>
+
+    <!-- Pop-up message -->
+    <div class="popup" id="popupMessage">
+        Discount applied on products!
+    </div>
+
+    <script>
+        document.getElementById('coupon-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+            var couponCode = document.getElementById('birthday-coupon-code').value.trim();
+
+            // Dummy check for coupon code validity (replace with your logic)
+            if (couponCode !== '') {
+                // Show pop-up message
+                document.getElementById('popupMessage').style.display = 'block';
+
+                // Simulate applying discount on products (replace with actual logic)
+                applyDiscountOnProducts();
+
+                // Clear input field after applying coupon (optional)
+                document.getElementById('birthday-coupon-code').value = '';
+            }
+        });
+
+        // Function to simulate applying discount on products
+        function applyDiscountOnProducts() {
+            // Here you can add logic to update UI or perform actions indicating the discount applied
+            setTimeout(function() {
+                // For demonstration, let's hide the pop-up after 2 seconds (adjust as needed)
+                document.getElementById('popupMessage').style.display = 'none';
+            }, 2000); // 2000 milliseconds = 2 seconds
+        }
+    </script>
+    <script>
+        function addToCart(productName, productPrice, productImage) {
+            // Example: Store product in local storage for demo purposes
+            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            cartItems.push({ name: productName, price: productPrice, image: productImage });
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        
+            // Redirect to cart.html
+            window.location.href = 'D:/ProComp/wishcart/cart.html';
+        }
+        function addToWishlist(productName, productImage) {
+        // Example: Store product in local storage for demo purposes
+        let wishlistItems = JSON.parse(localStorage.getItem('wishlistItems')) || [];
+        wishlistItems.push({ name: productName, image: productImage });
+        localStorage.setItem('wishlistItems', JSON.stringify(wishlistItems));
+    
+        // Redirect to wishlist.html
+        window.location.href = 'D:/ProComp/wishcart/wishlist.html';
+    }
+        </script>
+</body>
+</html>

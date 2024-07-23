@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - PresentPerfect</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .header-bar {
+            background-color: #ff80ab;
+            color: white;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .back-button {
+            position: absolute;
+            left: 10px;
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            background-color: rgba(232, 223, 230, 0.2);
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .cart-container {
+            padding: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+
+        .cart-item img {
+            width: 100px;
+            height: auto;
+            margin-right: 20px;
+            border-radius: 5px;
+        }
+
+        .cart-item h4 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .cart-item .price {
+            margin-left: auto;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .cart-item .remove-button {
+            margin-left: 10px;
+            padding: 5px 10px;
+            background-color: #d9534f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .cart-item .remove-button:hover {
+            background-color: #c9302c;
+        }
+
+        .total-amount {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .proceed-button {
+            display: block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #f0ad4e;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .proceed-button:hover {
+            background-color: #eea236;
+        }
+
+        .clear-cart-button {
+            display: block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #d9534f;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .clear-cart-button:hover {
+            background-color: #c9302c;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-bar">
+        <a href="D:\ProComp\startpg.html" class="back-button">← Back</a>
+        <span class="title">Cart - PresentPerfect.com</span>
+    </div>
+
+    <div class="cart-container" id="cart-container">
+        <!-- Cart items will be dynamically added here -->
+    </div>
+
+    <div class="total-amount" id="total-amount">
+        Total Payable Amount: Rs 0
+    </div>
+
+    <a href="D:\ProComp\wishcart\proceed.html" class="proceed-button">Proceed</a>
+    <button class="clear-cart-button" onclick="clearCart()">Clear Cart</button>
+
+    <script>
+        function displayCartItems() {
+            const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            const cartContainer = document.getElementById('cart-container');
+            cartContainer.innerHTML = ''; // Clear previous cart items
+            let totalAmount = 0;
+
+            cartItems.forEach((item, index) => {
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <h4>${item.name}</h4>
+                    <div class="price">Rs ${item.price}</div>
+                    <button class="remove-button" onclick="removeFromCart(${index})">Remove</button>
+                `;
+                cartContainer.appendChild(cartItem);
+                totalAmount += item.price;
+            });
+
+            document.getElementById('total-amount').innerText = `Total Payable Amount: Rs ${totalAmount}`;
+        }
+
+        function removeFromCart(index) {
+            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            cartItems.splice(index, 1);
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            displayCartItems();
+        }
+
+        function clearCart() {
+            localStorage.removeItem('cartItems');
+            displayCartItems();
+        }
+
+        displayCartItems();
+    </script>
+</body>
+</html>

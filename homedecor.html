@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Decor - PresentPerfect.com</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+        }
+        .header {
+            background-color: #ff80ab;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            font-size: 24px;
+            position: relative;
+        }
+        .back-button {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #fff;
+            color: #ff80ab;
+            border: none;
+            padding: 8px 10px;
+            cursor: pointer;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .back-button:hover {
+            background-color: #ff5c8d;
+        }
+        .products-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
+        }
+        .product {
+            width: calc(33.33% - 20px);
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+        .product:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        .product img {
+            width: 55%;
+            height: auto;
+            object-fit: cover;
+        }
+        .product-info {
+            padding: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+        .filter-sidebar {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #f0f0f0;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: left 0.3s ease;
+            z-index: 1000;
+        }
+        .filter-sidebar.show {
+            left: 0;
+        }
+        .filter-header {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .filter-options {
+            margin-bottom: 15px;
+        }
+        .filter-options label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #555;
+        }
+        .filter-options select, .filter-options input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 14px;
+            outline: none;
+        }
+        .filter-options button {
+            width: 100%;
+            padding: 10px;
+            background-color: #ff80ab;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        .filter-options button:hover {
+            background-color: #ff5c8d;
+        }
+        .toggle-filter-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #ff80ab;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            z-index: 1100;
+        }
+        .toggle-filter-btn:hover {
+            background-color: #ff5c8d;
+        }
+        .cart-icon, .favorite-icon {
+            width: 24px !important;
+            height: 24px !important;
+        }
+        .product-icons {
+            display: flex;
+            justify-content: center;
+            gap: 4px;
+            margin-top: 10px;
+        }
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 6px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            z-index: 1000;
+        }
+        @keyframes slideFooter {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        .footer-text {
+            display: inline-block;
+            padding-left: 100%;
+            animation: slideFooter 55s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="startpg.html" class="back-button">Back</a>
+        Home Decor - PresentPerfect.com
+    </div>
+
+    <!-- Filter Sidebar -->
+    <div class="filter-sidebar" id="filterSidebar">
+        <div class="filter-header">Filter Options</div>
+        <div class="filter-options">
+            <label for="priceFilter">Filter by Price:</label>
+            <select id="priceFilter">
+                <option value="0-1000">Rs0 - RS1000</option>
+                <option value="1001-5000">Rs1001 - Rs5000</option>
+                <option value="5001-10000">Rs5001 - Rs10000</option>
+                <option value="10000-15000">Rs10000 - Rs15000</option>
+                <option value="15000+">Over Rs15000</option>
+            </select>
+        </div>
+        <div class="filter-options">
+            <label for="brandFilter">Filter by Brand:</label>
+            <input type="text" id="brandFilter">
+        </div>
+        <div class="filter-options">
+            <label for="materialFilter">Filter by Material:</label>
+            <input type="text" id="materialFilter">
+        </div>
+        <div class="filter-options">
+            <button onclick="applyFilters()">Apply Filters</button>
+        </div>
+    </div>
+
+    <!-- Toggle Filter Button -->
+    <button class="toggle-filter-btn" onclick="toggleFilter()">Filter Options</button>
+
+    <!-- Products Section -->
+    <div class="products-container">
+        <!-- Product 1 -->
+        <div class="product">
+            <img src="https://ii1.pepperfry.com/media/catalog/product/b/o/1100x1210/boat-patter-multicolour-iron-wall-art-boat-patter-multicolour-iron-wall-art-hl2egj.jpg" alt="Product 1">
+            <div class="product-info">
+                <div>Handicrafts Wall Art</div>
+                <div>Rs 1200</div>
+                <div class="product-icons">
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Handicrafts Wall Art', 1200, 'https://ii1.pepperfry.com/media/catalog/product/b/o/1100x1210/boat-patter-multicolour-iron-wall-art-boat-patter-multicolour-iron-wall-art-hl2egj.jpg', 'Rs 1200')"></span>
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Handicrafts Wall Art', 'https://ii1.pepperfry.com/media/catalog/product/b/o/1100x1210/boat-patter-multicolour-iron-wall-art-boat-patter-multicolour-iron-wall-art-hl2egj.jpg', 'Rs 1200')"></span>
+                </div>
+            </div>
+        </div>
+        <!-- Product 2 -->
+        <div class="product">
+            <img src="https://ii1.pepperfry.com/media/catalog/product/d/a/494x544/dawn-canvas-wall-painting-by-art-gali-dawn-canvas-wall-painting-by-art-gali-w1g9cd.jpg" alt="Product 2">
+            <div class="product-info">
+                <div>Art Gali Canvas painting</div>
+                <div>Rs5100</div>
+                <div class="product-icons">
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Art Gali Canvas painting', 5100, 'https://ii1.pepperfry.com/media/catalog/product/d/a/494x544/dawn-canvas-wall-painting-by-art-gali-dawn-canvas-wall-painting-by-art-gali-w1g9cd.jpg', 'Rs 5100')"></span>
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Art Gali Canvas painting', 'https://ii1.pepperfry.com/media/catalog/product/d/a/494x544/dawn-canvas-wall-painting-by-art-gali-dawn-canvas-wall-painting-by-art-gali-w1g9cd.jpg', 'Rs 5100')"></span>
+                </div>
+            </div>
+        </div>
+        <!-- Product 3 -->
+        <div class="product">
+            <img src="https://ii1.pepperfry.com/media/catalog/product/p/o/494x544/potterybarn-red-cotton-shade-shelf-floor-lamp-with-birch-ply-base-by-sanded-edge-potterybarn-red-cot-vtwcen.jpg" alt="Product 3">
+            <div class="product-info">
+                <div>Glow Lamp by Handicrafts</div>
+                <div>Rs2000</div>
+                <div class="product-icons">
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Glow Lamp by Handicrafts', 2000, 'https://ii1.pepperfry.com/media/catalog/product/p/o/494x544/potterybarn-red-cotton-shade-shelf-floor-lamp-with-birch-ply-base-by-sanded-edge-potterybarn-red-cot-vtwcen.jpg', 'Rs 2000')"></span>
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Glow Lamp by Handicrafts', 'https://ii1.pepperfry.com/media/catalog/product/p/o/494x544/potterybarn-red-cotton-shade-shelf-floor-lamp-with-birch-ply-base-by-sanded-edge-potterybarn-red-cot-vtwcen.jpg', 'Rs 2000')"></span>
+                </div>
+            </div>
+        </div>
+                <!-- Product 4 -->
+                <div class="product">
+                    <img src="https://ii1.pepperfry.com/media/catalog/product/a/v/494x544/avalon-fabric-manual-1-seater-recliner-in-grey-colour-avalon-fabric-manual-1-seater-recliner-in-grey-iwpfbh.jpg" alt="Product 4">
+                    <div class="product-info">
+                        <div>Avalon fabric CasaCraft Recliner</div>
+                        <div>Rs12000 </div>
+                        <div class="product-icons">
+                            <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Avalon fabric CasaCraft Recliner', 12000, 'https://ii1.pepperfry.com/media/catalog/product/a/v/494x544/avalon-fabric-manual-1-seater-recliner-in-grey-colour-avalon-fabric-manual-1-seater-recliner-in-grey-iwpfbh.jpg')"></span>
+                            <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Product 1')"></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more products as needed -->
+                <!-- Product 5 -->
+                <div class="product">htt
+                    <img src="https://ii1.pepperfry.com/media/catalog/product/f/i/494x544/fisher-office-table-in-leon-teak-finish-by-neudot-fisher-office-table-in-leon-teak-finish-by-neudot-gup4ag.jpg" alt="Product 5">
+                    <div class="product-info">
+                        <div>Casa Craft Computer table</table></div>
+                        <div>Rs 5300</div>
+                        <div class="product-icons">
+                            <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Casa Craft Computer table', 5300, 'https://ii1.pepperfry.com/media/catalog/product/f/i/494x544/fisher-office-table-in-leon-teak-finish-by-neudot-fisher-office-table-in-leon-teak-finish-by-neudot-gup4ag.jpg')"></span>
+                            <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Product 1')"></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product 6 -->
+                <div class="product">
+                    <img src="https://ii1.pepperfry.com/media/catalog/product/b/l/494x544/black-wood-chandeliers--by-eliante-by-jainsons-lights-black-wood-chandeliers--by-eliante-by-jainsons-6pedt2.jpg" alt="Product 6">
+                    <div class="product-info">
+                        <div>Chandelier by Handicrafts</div>
+                        <div>Rs 1600</div>
+                        <div class="product-icons">
+                            <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Chandelier by Handicrafts', 1600, 'https://ii1.pepperfry.com/media/catalog/product/b/l/494x544/black-wood-chandeliers--by-eliante-by-jainsons-lights-black-wood-chandeliers--by-eliante-by-jainsons-6pedt2.jpg')"></span>
+                            <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Product 1')"></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product 7 -->
+                <div class="product">
+                    <img src="https://ii1.pepperfry.com/media/catalog/product/m/u/494x544/multicolour-mdf-wood-11-5-x-1-5-x-11-5-inch-rough---tough-wall-clock-by-random-multicolour-mdf-wood--imdxun.jpg" alt="Product 7">
+                    <div class="product-info">
+                        <div>Clock by Random</div>
+                        <div>Rs 900</div>
+                        <div class="product-icons">
+                            <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Clock by Random', 900, 'https://ii1.pepperfry.com/media/catalog/product/m/u/494x544/multicolour-mdf-wood-11-5-x-1-5-x-11-5-inch-rough---tough-wall-clock-by-random-multicolour-mdf-wood--imdxun.jpg')"></span>
+                            <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Product 1')"></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product 8 -->
+                <div class="product">
+                    <img src="https://ii1.pepperfry.com/media/catalog/product/g/o/494x544/golden-glaze--set-of-2--blue-terracotta-table-vase-golden-glaze--set-of-2--blue-terracotta-table-vas-utu6ma.jpg" alt="Product 8">
+                    <div class="product-info">
+                        <div>Terracota Vase by Art Gali</div>
+                        <div>Rs 1000</div>
+                        <div class="product-icons">
+                            <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Terracota Vase by Art Gali', 1000, 'https://ii1.pepperfry.com/media/catalog/product/g/o/494x544/golden-glaze--set-of-2--blue-terracotta-table-vase-golden-glaze--set-of-2--blue-terracotta-table-vas-utu6ma.jpg')"></span>
+                            <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Product 1')"></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product 9 -->
+                <div class="product">
+                    <img src="https://ii1.pepperfry.com/media/catalog/product/w/o/494x544/wooden-8-5-inches-white-and-sky-blue-sailing-ship-showpiece-by-exim-d-cor-wooden-8-5-inches-white-an-x2gyeu.jpg" alt="Product 9">
+                    <div class="product-info">
+                        <div>Showpiece by Random</div>
+                        <div>Rs1300</div>
+                        <div class="product-icons">
+                            <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Showpiece by Random', 1300, 'https://ii1.pepperfry.com/media/catalog/product/w/o/494x544/wooden-8-5-inches-white-and-sky-blue-sailing-ship-showpiece-by-exim-d-cor-wooden-8-5-inches-white-an-x2gyeu.jpg')"></span>
+                            <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Product 1')"></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product 10 -->
+                <div class="product">
+                    <img src="https://ii1.pepperfry.com/media/catalog/product/w/o/494x544/wooden-wall-mirror-in-white-by-the-urban-store-wooden-wall-mirror-in-white-by-the-urban-store-ulv58o.jpg" alt="Product 10">
+                    <div class="product-info">
+                        <div>Decorative mirror by Urban store</div>
+                        <div>Rs1200</div>
+                        <div class="product-icons">
+                            <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Decorative mirror by Urban store', 1200, 'https://ii1.pepperfry.com/media/catalog/product/w/o/494x544/wooden-wall-mirror-in-white-by-the-urban-store-wooden-wall-mirror-in-white-by-the-urban-store-ulv58o.jpg')"></span>
+                            <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Product 1')"></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product 11 -->
+                <div class="product">
+                    <img src="https://ii1.pepperfry.com/media/catalog/product/c/o/494x544/count-the-memories-not-the-calories-wooden-plaque-by-art-street-count-the-memories-not-the-calories--k0x80w.jpg" alt="Product 11">
+                    <div class="product-info">
+                        <div>Wall hanging by Art Gali</div>
+                        <div>Rs 350</div>
+                        <div class="product-icons">
+                            <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Wall hanging by Art Gali', 350, 'https://ii1.pepperfry.com/media/catalog/product/c/o/494x544/count-the-memories-not-the-calories-wooden-plaque-by-art-street-count-the-memories-not-the-calories--k0x80w.jpg')"></span>
+                            <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Product 1')"></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product 12 -->
+                <div class="product">
+                    <img src="https://ii1.pepperfry.com/media/catalog/product/k/r/494x544/kryss-solid-wood-wall-shelves-by-woodsworth-kryss-solid-wood-wall-shelves-by-woodsworth-uy3i2c.jpg" alt="Product 12">
+                    <div class="product-info">
+                        <div>Wall Shelf by Urban store</div>
+                        <div>Rs3200</div>
+                        <div class="product-icons">
+                            <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Wall Shelf by Urban store', 3200, 'https://ii1.pepperfry.com/media/catalog/product/k/r/494x544/kryss-solid-wood-wall-shelves-by-woodsworth-kryss-solid-wood-wall-shelves-by-woodsworth-uy3i2c.jpg')"></span>
+                            <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Product 1')"></span>
+                        </div>
+                    </div>
+                </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-text">Sale up to 60% off on selected items! Limited time offer. Shop now and save big on your favorite decor items!</div>
+    </div>
+
+    <script>
+                function addToCart(productName, productPrice, productImage) {
+            // Example: Store product in local storage for demo purposes
+            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            cartItems.push({ name: productName, price: productPrice, image: productImage });
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        
+            // Redirect to cart.html
+            window.location.href = 'D:/ProComp/wishcart/cart.html';
+        }
+                function addToWishlist(productName, imageUrl, price) {
+    let wishlistItems = JSON.parse(localStorage.getItem('wishlistItems')) || [];
+    wishlistItems.push({ name: productName, image: imageUrl, price: price });
+    localStorage.setItem('wishlistItems', JSON.stringify(wishlistItems));
+    window.location.href = 'D:/ProComp/wishcart/wishlist.html'; // Redirect to wishlist page
+}
+
+        // Retrieve wishlist items from localStorage
+        let wishlistItems = JSON.parse(localStorage.getItem('wishlistItems')) || [];
+    
+        // Loop through wishlistItems and generate HTML for each item
+        wishlistItems.forEach(item => {
+            let productContainer = document.createElement('div');
+            productContainer.classList.add('product');
+    
+            let imageElement = document.createElement('img');
+            imageElement.src = item.image; // Set the image source
+    
+            let productInfo = document.createElement('div');
+            productInfo.classList.add('product-info');
+            productInfo.innerHTML = `
+                <div>${item.name}</div>
+                <div>${item.price}</div>
+            `;
+    
+            productContainer.appendChild(imageElement);
+            productContainer.appendChild(productInfo);
+    
+            // Append productContainer to the wishlist page container
+            document.getElementById('wishlist-container').appendChild(productContainer);
+        });
+
+        // Function to generate product elements
+        function generateProducts() {
+            const productsContainer = document.querySelector('.products-container');
+
+            products.forEach(product => {
+                const productElement = document.createElement('div');
+                productElement.classList.add('product');
+
+                productElement.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}">
+                    <div class="product-info">
+                        <div>${product.name}</div>
+                        <div>${product.price}</div>
+                        <div class="product-icons">
+                            ${product.addToCart ? `<span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon"></span>` : ''}
+                            ${product.addToWishlist ? `<span><img src="https://cdn-icons-png.flaticon.com/128/1828/1828945.png" alt="Add to Wishlist" title="Add to Wishlist" class="favorite-icon"></span>` : ''}
+                        </div>
+                    </div>
+                `;
+
+                productsContainer.appendChild(productElement);
+            });
+        }
+
+        // Call function to generate products on page load
+        generateProducts();
+        </script>
+            <script>
+
+
+        // Toggle filter sidebar
+        function toggleFilter() {
+            const filterSidebar = document.getElementById('filterSidebar');
+            filterSidebar.classList.toggle('show');
+        }
+        function applyFilters() {
+            const priceFilter = document.getElementById('priceFilter').value;
+            const brandFilter = document.getElementById('brandFilter').value.toLowerCase(); // convert to lowercase for case-insensitive comparison
+            const materialFilter = document.getElementById('materialFilter').value.toLowerCase(); // convert to lowercase for case-insensitive comparison
+
+            const products = document.querySelectorAll('.product');
+
+            products.forEach(product => {
+                const productPrice = parseInt(product.querySelector('.product-info div:nth-child(2)').textContent.trim().replace(/\D/g, '')); // extract price and convert to integer
+                const productBrand = product.querySelector('.product-info div:nth-child(1)').textContent.trim().toLowerCase(); // extract brand and convert to lowercase
+                const productMaterial = ''; // define or retrieve product material data if available
+
+                const priceRange = priceFilter.split('-').map(val => parseInt(val.replace(/\D/g, ''))); // parse price range
+
+                const meetsPriceCriteria = (priceRange[0] === 0 && priceRange[1] === 100000) || (productPrice >= priceRange[0] && productPrice <= priceRange[1]);
+                const meetsBrandCriteria = brandFilter === '' || productBrand.includes(brandFilter);
+                const meetsMaterialCriteria = materialFilter === '' || productMaterial.toLowerCase().includes(materialFilter);
+
+                if (meetsPriceCriteria && meetsBrandCriteria && meetsMaterialCriteria) {
+                    product.style.display = 'block'; // show the product
+                } else {
+                    product.style.display = 'none'; // hide the product
+                }
+                });
+            }
+                </script>
+            
+                
+</body>
+</html> 
+            

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kids - PresentPerfect.com</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+        }
+        .cart-icon, .favorite-icon {
+            width: 20px !important;
+            height: 20px !important;
+        }
+        .header {
+            background-color: #ff80ab;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            font-size: 24px;
+            position: relative;
+        }
+        .back-button {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #fff;
+            color: #ff80ab;
+            border: none;
+            padding: 8px 10px;
+            cursor: pointer;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .back-button:hover {
+            background-color: #ff5c8d;
+        }
+        .products-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+        .product {
+            width: 220px;
+            height: 220px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+        .product:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        .product img {
+            width: 60%;
+            height: 135px;
+            object-fit: cover;
+        }
+        .product-name {
+            padding: 10px;
+            font-size: 16px;
+            color: #0a0a0a;
+        }
+        .surprise-box-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px auto 0 auto;
+        }
+        .click-to-open {
+            font-size: 22px;
+            font-weight: bold;
+            color: #ff80ab;
+            margin-bottom: -12px;
+            margin-top: -20px;
+        }
+        .surprise-box {
+            width: 150px;
+            height: 150px;
+            position: relative;
+            cursor: pointer;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 30px;
+            margin-top: px;
+        }
+        .surprise-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 7px rgba(0,0,0,0.3);
+        }
+        .balloons-animation {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            object-fit: cover;
+            z-index: -1; /* Ensure the video is behind other content */
+            display: none; /* Initially hidden */
+        }
+        .coupon-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+        .coupon-popup h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .coupon-popup img {
+            width: 100%;
+            height: 80%;
+        }
+        .coupon-popup button {
+            display: block;
+            margin: 10px auto;
+            padding: 10px 20px;
+            background-color: #ff80ab;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .coupon-popup button:hover {
+            background-color: #ff5c8d;
+        }
+    
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 4px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            z-index: 1000;
+        }
+        @keyframes slideFooter {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        .footer-text {
+            display: inline-block;
+            padding-left: 100%;
+            animation: slideFooter 55s linear infinite;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="startpg.html" class="back-button">Back</a>
+        Kids - PresentPerfect.com
+    </div>
+    <!-- Products Section -->
+    <div class="products-container">
+        <!-- Product 1 -->
+        <div class="product">
+            <img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQ9XDaTFyANMAUO8I1gQOMAu7GrYK0Ki4R8BZfYWfjYSrZlSniZO9B0NeJ_VZU6c5HGP02QIJMeFs1mQpUv_6w7Jwvf56gVkWIDc0DB10EyVCzxCk5qa9IiUw&usqp=CAE" alt="Product 1">
+            <div class="product-name">Racing car</div>
+            <div>Rs 600</div>
+            <div class="product-icons">
+                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Racing car', 600, 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQ9XDaTFyANMAUO8I1gQOMAu7GrYK0Ki4R8BZfYWfjYSrZlSniZO9B0NeJ_VZU6c5HGP02QIJMeFs1mQpUv_6w7Jwvf56gVkWIDc0DB10EyVCzxCk5qa9IiUw&usqp=CAE')"></span>
+                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Racing car', 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQ9XDaTFyANMAUO8I1gQOMAu7GrYK0Ki4R8BZfYWfjYSrZlSniZO9B0NeJ_VZU6c5HGP02QIJMeFs1mQpUv_6w7Jwvf56gVkWIDc0DB10EyVCzxCk5qa9IiUw&usqp=CAE')"></span>
+            </div>
+        </div>
+        
+<!-- Product 2 -->
+<div class="product">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2NHHejRs4WGOSUMfHhn8svMzzQ4OMe0ApYw&s" alt="Unicorn plush toy">
+    <div class="product-name">Unicorn plush toy</div>
+    <div>Rs 130</div>
+    <div class="product-icons">
+        <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Unicorn plush toy', 130, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2NHHejRs4WGOSUMfHhn8svMzzQ4OMe0ApYw&s')"></span>
+        <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Unicorn plush toy', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2NHHejRs4WGOSUMfHhn8svMzzQ4OMe0ApYw&s')"></span>
+    </div>
+</div>
+
+<!-- Product 3 -->
+<div class="product">
+    <img src="https://reviewed-com-res.cloudinary.com/image/fetch/s--Ruyg0YQZ--/b_white,c_fill_pad,cs_srgb,f_auto,fl_progressive.strip_profile,g_auto,h_220,q_auto,w_220/https://reviewed-production.s3.amazonaws.com/attachment/af351ceeca0c4111/34.png" alt="Mega Blocks">
+    <div class="product-name">Mega Blocks</div>
+    <div>Rs 900</div>
+    <div class="product-icons">
+        <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Mega Blocks', 900, 'https://reviewed-com-res.cloudinary.com/image/fetch/s--Ruyg0YQZ--/b_white,c_fill_pad,cs_srgb,f_auto,fl_progressive.strip_profile,g_auto,h_220,q_auto,w_220/https://reviewed-production.s3.amazonaws.com/attachment/af351ceeca0c4111/34.png')"></span>
+        <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Mega Blocks', 'https://reviewed-com-res.cloudinary.com/image/fetch/s--Ruyg0YQZ--/b_white,c_fill_pad,cs_srgb,f_auto,fl_progressive.strip_profile,g_auto,h_220,q_auto,w_220/https://reviewed-production.s3.amazonaws.com/attachment/af351ceeca0c4111/34.png')"></span>
+    </div>
+</div>
+
+<!-- Product 4 -->
+<div class="product">
+    <img src="https://reviewed-com-res.cloudinary.com/image/fetch/s--yr7-UEHB--/b_white,c_fill_pad,cs_srgb,f_auto,fl_progressive.strip_profile,g_auto,h_220,q_auto,w_220/https://reviewed-production.s3.amazonaws.com/attachment/0f02bc055bcd4a59/11.png" alt="3D Play carpet">
+    <div class="product-name">3D Play carpet</div>
+    <div>Rs 499</div>
+    <div class="product-icons">
+        <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('3D Play carpet', 499, 'https://reviewed-com-res.cloudinary.com/image/fetch/s--yr7-UEHB--/b_white,c_fill_pad,cs_srgb,f_auto,fl_progressive.strip_profile,g_auto,h_220,q_auto,w_220/https://reviewed-production.s3.amazonaws.com/attachment/0f02bc055bcd4a59/11.png')"></span>
+        <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('3D Play carpet', 'https://reviewed-com-res.cloudinary.com/image/fetch/s--yr7-UEHB--/b_white,c_fill_pad,cs_srgb,f_auto,fl_progressive.strip_profile,g_auto,h_220,q_auto,w_220/https://reviewed-production.s3.amazonaws.com/attachment/0f02bc055bcd4a59/11.png')"></span>
+    </div>
+</div>
+
+<!-- Product 5 -->
+<div class="product">
+    <img src="https://m.media-amazon.com/images/I/61xynpVnvrL._AC_UF1000,1000_QL80_.jpg" alt="Kids Camera">
+    <div class="product-name">Kids Camera</div>
+    <div>Rs 1500</div>
+    <div class="product-icons">
+        <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Kids Camera', 1500, 'https://m.media-amazon.com/images/I/61xynpVnvrL._AC_UF1000,1000_QL80_.jpg')"></span>
+        <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Kids Camera', 'https://m.media-amazon.com/images/I/61xynpVnvrL._AC_UF1000,1000_QL80_.jpg')"></span>
+    </div>
+</div>
+
+<!-- Product 6 -->
+<div class="product">
+    <img src="https://i.etsystatic.com/45053719/r/il/d1fa5a/5811514078/il_794xN.5811514078_mzxd.jpg" alt="Doll House">
+    <div class="product-name">Doll House</div>
+    <div>Rs 1400</div>
+    <div class="product-icons">
+        <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Doll House', 1400, 'https://i.etsystatic.com/45053719/r/il/d1fa5a/5811514078/il_794xN.5811514078_mzxd.jpg')"></span>
+        <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Doll House', 'https://i.etsystatic.com/45053719/r/il/d1fa5a/5811514078/il_794xN.5811514078_mzxd.jpg')"></span>
+    </div>
+</div>
+
+<!-- Product 7 -->
+<div class="product">
+    <img src="https://m.media-amazon.com/images/I/71flpMokoIL._AC_UL480_FMwebp_QL65_.jpg" alt="Ultimate Science kit">
+    <div class="product-name">Ultimate Science kit</div>
+    <div>Rs 1000</div>
+    <div class="product-icons">
+        <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Ultimate Science kit', 1000, 'https://m.media-amazon.com/images/I/71flpMokoIL._AC_UL480_FMwebp_QL65_.jpg')"></span>
+        <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Ultimate Science kit', 'https://m.media-amazon.com/images/I/71flpMokoIL._AC_UL480_FMwebp_QL65_.jpg')"></span>
+    </div>
+</div>
+
+<!-- Product 8 -->
+<div class="product">
+    <img src="https://m.media-amazon.com/images/I/61j-xsHMGCS._AC_UL480_FMwebp_QL65_.jpg" alt="School Bag">
+    <div class="product-name">School Bag</div>
+    <div>Rs 200</div>
+    <div class="product-icons">
+        <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('School Bag', 200, 'https://m.media-amazon.com/images/I/61j-xsHMGCS._AC_UL480_FMwebp_QL65_.jpg')"></span>
+        <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('School Bag', 'https://m.media-amazon.com/images/I/61j-xsHMGCS._AC_UL480_FMwebp_QL65_.jpg')"></span>
+    </div>
+</div>
+
+<!-- Product 9 -->
+<div class="product">
+    <img src="https://m.media-amazon.com/images/I/61TY611i6LL._AC_UL480_FMwebp_QL65_.jpg" alt="Kids Watch">
+    <div class="product-name">Kids Watch</div>
+    <div>Rs 1200</div>
+    <div class="product-icons">
+        <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Kids Watch', 1200, 'https://m.media-amazon.com/images/I/61TY611i6LL._AC_UL480_FMwebp_QL65_.jpg')"></span>
+        <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Kids Watch', 'https://m.media-amazon.com/images/I/61TY611i6LL._AC_UL480_FMwebp_QL65_.jpg')"></span>
+    </div>
+</div>
+        </div>
+    </div>
+
+    <!-- Surprise Box Animation -->
+    <div class="surprise-box-container">
+        <div class="click-to-open">Click to open</div>
+        <div class="surprise-box" id="surpriseBox">
+            <img src="https://cdn-icons-png.flaticon.com/128/5065/5065719.png" alt="Surprise Box">
+        </div>
+    </div>
+
+    <!-- Video of Balloons Animation -->
+    <video class="balloons-animation" id="balloonsAnimation" width="100%" autoplay loop muted>
+        <source src="https://cdnl.iconscout.com/lottie/premium/preview-watermark/flying-balloons-10330920-8401823.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Coupon Popup -->
+    <div class="coupon-popup" id="couponPopup">
+        <h2>Congratulations!</h2>
+        <img src="https://img.freepik.com/premium-vector/gift-voucher-template-isolated-gray-background-discount-coupon-50-off-promotion-sale_97458-853.jpg?size=626&ext=jpg&ga=GA1.1.21737363.1711112647&semt=sph" alt="Coupon Image">
+        <p>Here's your special discount coupon.</p>
+        <button onclick="closeCoupon()">Redeem</button>
+    </div>
+
+    <script>
+        var video = document.getElementById('balloonsAnimation');
+        var surpriseBox = document.getElementById('surpriseBox');
+        var couponPopup = document.getElementById('couponPopup');
+
+        // Event listener for surprise box click
+        surpriseBox.addEventListener('click', function() {
+            // Show balloons animation
+            video.style.display = 'block';
+            video.play();
+
+            // Show coupon popup
+            couponPopup.style.display = 'block';
+        });
+
+        // Function to close coupon popup
+        function closeCoupon() {
+            // Hide coupon popup
+            couponPopup.style.display = 'none';
+
+            // Stop balloons animation
+            video.pause();
+            video.style.display = 'none';
+        }
+        function addToCart(productName, productPrice, productImage) {
+            // Example: Store product in local storage for demo purposes
+            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            cartItems.push({ name: productName, price: productPrice, image: productImage });
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        
+            // Redirect to cart.html
+            window.location.href = 'D:/ProComp/wishcart/cart.html';
+        }
+function addToWishlist(productName, productImage) {
+    // Store product in local storage for demo purposes
+    let wishlistItems = JSON.parse(localStorage.getItem('wishlistItems')) || [];
+    wishlistItems.push({ name: productName, image: productImage });
+    localStorage.setItem('wishlistItems', JSON.stringify(wishlistItems));
+
+    // Redirect to wishcart/wishlist.html
+    window.location.href = 'wishcart/wishlist.html';
+}
+    </script>
+    <div class="footer">
+        <div class="footer-text">2024 PresentPerfect.com - All rights reserved. &nbsp; Made with the purpose of a project competition. &nbsp; Estd. in 2024 by some students of Fr. Conceicao Rodrigues Institute of Technology. &nbsp; Refunds not accepted. &nbsp; For any enquiry, contact 0123456789.</div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Occasions - PresentPerfect.com</title>
+    <style>
+        body {
+            font-family: Calibri, Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+        .top-bar {
+            width: 100%;
+            background-color: #d648b3;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .header {
+            background-color: rgba(222, 220, 221, 0.8);
+            text-align: center;
+            padding: 10px 0;
+            margin-bottom: 20px;
+            position: relative;
+            width: 100%;
+            z-index: 1; /* Ensure header stays above sidebar */
+        }
+        .white-bar {
+            background-color: white;
+            width: 100%;
+            padding: 20px 0;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-top: 20px;
+        }
+        .occasion-category {
+            font-size: 28px;
+            font-weight: bold;
+            color: black;
+            margin-bottom: 10px;
+        }
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .product {
+            text-align: center;
+            margin: 10px;
+        }
+        .product img {
+            width: 150px;
+            height: 150px;
+        }
+        .product-name {
+            font-size: 16px;
+            margin-top: 5px;
+        }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -200px; /* Start sidebar off-screen */
+            width: 200px;
+            height: 100%;
+            background-color:  #eee;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            transition: right 0.3s ease; /* Add transition for smooth opening/closing */
+            z-index: 2; /* Ensure sidebar is above other content */
+        }
+        .sidebar.open {
+            right: 0; /* Slide sidebar into view */
+        }
+        .sidebar-item {
+            margin-bottom: 25px; /* Increased space between sidebar items */
+            cursor: pointer;
+            color: #333;
+            text-decoration: none;
+            font-size: 23px; /* Increased font size */
+        }
+        .sidebar-item:hover {
+            color: #d648b3;
+        }
+        .logo {
+            color: #d648b3;
+            font-size: 36px;
+            font-weight: bold;
+            font-family: 'Segoe Script', sans-serif;
+            margin-bottom: 5px;
+            cursor: pointer; /* Add cursor pointer for clickable effect */
+        }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #496590;
+            color: black;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .toggle-sidebar {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            z-index: 3; /* Ensure button stays above sidebar */
+        }
+        .toggle-sidebar:before {
+            content: '☰ Open Sidebar';
+            font-size: 25px;
+            color: #496590;
+        }
+        .toggle-sidebar.open:before {
+            content: '✕ Close Sidebar';
+        }
+        .close-button {
+            align-self: flex-end;
+            margin-top: auto;
+            background-color: #496590;
+            color: black;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: auto;
+            margin-bottom: 20px;
+        }
+        .icon {
+            vertical-align: middle;
+            margin-right: 8px;
+            width: 40px;
+            height: 40px;
+        }
+        .cart-icon, .favorite-icon {
+    width: 15px !important;
+    height: 15px !important;
+}
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 6px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            z-index: 1000;
+        }
+        @keyframes slideFooter {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        .footer-text {
+            display: inline-block;
+            padding-left: 100%;
+            animation: slideFooter 55s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="startpg.html" class="back-button">Back</a>
+        <div class="logo">PresentPerfect.com</div>
+        <div class="toggle-sidebar" onclick="toggleSidebar()"></div>
+    </div>
+    <div class="top-bar">
+        What's the Occasion?
+    </div>
+    <div id="Birthdays"class="white-bar">
+        <div class="occasion-category">
+            <img src="https://cdn-icons-png.flaticon.com/128/2454/2454297.png" alt="Birthday Icon" class="icon">
+            Birthdays
+        </div>
+        <div class="product-list">
+            <div class="product">
+                <img src="https://images.uncommongoods.com/images/items/60000/60023_1_640px.webp" alt="Sari Totes">
+                <div class="product-name">Sari Totes</div>
+                <div>Rs 900</div>
+                <div class="product-icons">
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Sari Totes', 900, 'https://images.uncommongoods.com/images/items/60000/60023_1_640px.webp')"></span>
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Sari Totes', 'https://images.uncommongoods.com/images/items/60000/60023_1_640px.webp')"></span>
+                </div>
+            </div>
+            <div class="product">
+                <img src="https://images.uncommongoods.com/images/items/60100/60169_2_360px.webp" alt="OnTheGo Sling Bags">
+                <div class="product-name">OnTheGo Sling Bags</div>
+                <div>Rs 1000</div>
+                <div class="product-icons">
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('OnTheGo Sling Bags', 1000, 'https://images.uncommongoods.com/images/items/60100/60169_2_360px.webp')"></span>
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('OnTheGo Sling Bags', 'https://images.uncommongoods.com/images/items/60100/60169_2_360px.webp')"></span>
+                </div>
+            </div>
+            <div class="product">
+                <img src="https://cimages.personalcreations.com/is/image/planetartdmc/PCR23_24F12X_ENVIRO_SQ?$PCRProductImage$" alt="Best Ever Photo Hat">
+                <div class="product-name">Best Ever Photo Hat</div>
+                <div>Rs 600</div>
+                <div class="product-icons">
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Best Ever Photo Hat', 600, 'https://cimages.personalcreations.com/is/image/planetartdmc/PCR23_24F12X_ENVIRO_SQ?$PCRProductImage$')"></span>
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Best Ever Photo Hat', 'https://cimages.personalcreations.com/is/image/planetartdmc/PCR23_24F12X_ENVIRO_SQ?$PCRProductImage$')"></span>
+                </div>
+            </div>
+            <div class="product">
+                <img src="https://cimages.personalcreations.com/is/image/planetartdmc/PCR23_22Z331X_TABLE_CLOSE_UP_ENVIRO_EDITED_SQ?$PCRProductImage$" alt="Wallet">
+                <div class="product-name">Wallet</div>
+                <div>Rs 1100</div>
+                <div class="product-icons">
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Wallet', 1100, 'https://cimages.personalcreations.com/is/image/planetartdmc/PCR23_22Z331X_TABLE_CLOSE_UP_ENVIRO_EDITED_SQ?$PCRProductImage$')"></span>
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Wallet', 'https://cimages.personalcreations.com/is/image/planetartdmc/PCR23_22Z331X_TABLE_CLOSE_UP_ENVIRO_EDITED_SQ?$PCRProductImage$')"></span>
+                </div>
+            </div>
+            <div class="product">
+                <img src="https://cimages.personalcreations.com/is/image/planetartdmc/PCR23_15F04X_CAT_ENVIRO_ALT_CP_EDITED_SQ?$PCRProductImage$" alt="Plush Dolls">
+                <div class="product-name">Plush Dolls</div>
+                <div>Rs 1300</div>
+                <div class="product-icons">
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Plush Dolls', 1300, 'https://cimages.personalcreations.com/is/image/planetartdmc/PCR23_15F04X_CAT_ENVIRO_ALT_CP_EDITED_SQ?$PCRProductImage$')"></span>
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Plush Dolls', 'https://cimages.personalcreations.com/is/image/planetartdmc/PCR23_15F04X_CAT_ENVIRO_ALT_CP_EDITED_SQ?$PCRProductImage$')"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id ="Anniversaries"class="white-bar">
+        <div class="occasion-category">
+            <img src="https://cdn-icons-png.flaticon.com/128/4414/4414094.png" alt="Anniversary Icon" class="icon">
+            Anniversaries
+        </div>
+        <div class="product-list">
+            <div class="product">
+                <img src="https://assets.winni.in/product/primary/2022/9/73277.jpeg?dpr=1&w=500" alt="lyrics photo frame">
+                <div class="product-name">lyrics photo frame</div>
+                <div>Rs 1400</div>
+                <div class="product-icons">
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('lyrics photo frame', 1400, 'https://assets.winni.in/product/primary/2022/9/73277.jpeg?dpr=1&w=500')"></span>
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('lyrics photo frame', 'https://assets.winni.in/product/primary/2022/9/73277.jpeg?dpr=1&w=500')"></span>
+                </div>
+            </div>
+            <div class="product">
+                <img src="https://cdn.augrav.com/online/jewels/2024/03/06120924/2-1.jpg" alt="Couple bracelets">
+                <div class="product-name">Couple bracelets</div>
+                <div>Rs 1200</div>
+                <div class="product-icons">
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Couple bracelets', 1200, 'https://cdn.augrav.com/online/jewels/2024/03/06120924/2-1.jpg')"></span>
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Couple bracelets', 'https://cdn.augrav.com/online/jewels/2024/03/06120924/2-1.jpg')"></span>
+                </div>
+            </div>
+            <div class="product">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJRN7slUkGHP9DL7hWMXyWZAbf9IBBgmyfVQ&s" alt="Couple gift hamper">
+                <div class="product-name">Couple gift hamper</div>
+                <div>Rs 2000</div>
+                <div class="product-icons">
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Couple gift hamper', 2000, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJRN7slUkGHP9DL7hWMXyWZAbf9IBBgmyfVQ&s')"></span>
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Couple gift hamper', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJRN7slUkGHP9DL7hWMXyWZAbf9IBBgmyfVQ&s')"></span>
+                </div>
+            </div>
+            <div class="product">
+                <img src="https://cimages.personalcreations.com/is/image/planetartdmc/RED20_20RES82AS_ENVIRO_CP_EDITED_SQ?$PCRProductImage$" alt="Personalized watches">
+                <div class="product-name">Personalized watches</div>
+                <div>Rs 2500</div>
+                <div class="product-icons">
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Personalized watches', 2500, 'https://cimages.personalcreations.com/is/image/planetartdmc/RED20_20RES82AS_ENVIRO_CP_EDITED_SQ?$PCRProductImage$')"></span>
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Personalized watches', 'https://cimages.personalcreations.com/is/image/planetartdmc/RED20_20RES82AS_ENVIRO_CP_EDITED_SQ?$PCRProductImage$')"></span>
+                </div>
+            </div>
+            <div class="product">
+                <img src="https://cimages.personalcreations.com/is/image/planetartdmc/RED19_19REF25NR12_WDR_SQ?$PCRProductImage$" alt="Personalized throw pillows">
+                <div class="product-name">Personalized throw pillows</div>
+                <div>Rs 2800</div>
+                <div class="product-icons">
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Personalized throw pillows', 2800, 'https://cimages.personalcreations.com/is/image/planetartdmc/RED19_19REF25NR12_WDR_SQ?$PCRProductImage$')"></span>
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Personalized throw pillows', 'https://cimages.personalcreations.com/is/image/planetartdmc/RED19_19REF25NR12_WDR_SQ?$PCRProductImage$')"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="Weddings" class="white-bar">
+        <div class="occasion-category">
+            <img src="https://cdn-icons-png.flaticon.com/128/6837/6837238.png" alt="Wedding Icon" class="icon">
+            Weddings
+        </div>
+        <div class="product-list">
+            <div class="product">
+                <img src="https://i.etsystatic.com/10379317/r/il/474d1c/3638946596/il_794xN.3638946596_icm4.jpg" alt="Wedding Product 1">
+                <div class="product-name">Customized oilfine Canvas</div>
+                <div>Rs 2900</div>
+                <div class="product-icons">
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Customized oilfine Canvas', 2900, 'https://i.etsystatic.com/10379317/r/il/474d1c/3638946596/il_794xN.3638946596_icm4.jpg')"></span>
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Customized oilfine Canvas', 'https://i.etsystatic.com/10379317/r/il/474d1c/3638946596/il_794xN.3638946596_icm4.jpg')"></span>
+                </div>
+            </div>
+            <div class="product">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoMAci7Vv-GgjOdWAK8PBm02byPz2_Q2tnAg&s" alt="Wedding Product 2">
+                <div class="product-name">Wedding hampers</div>
+                <div>Rs 3200</div>
+                <div class="product-icons">
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Wedding hampers', 3200, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoMAci7Vv-GgjOdWAK8PBm02byPz2_Q2tnAg&s')"></span>
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Wedding hampers', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoMAci7Vv-GgjOdWAK8PBm02byPz2_Q2tnAg&s')"></span>
+                </div>
+            </div>
+            <div class="product">
+                <img src="https://i.pinimg.com/736x/9c/1a/f1/9c1af165630204b34c759a6c46a556af.jpg" alt="Wedding Product 3">
+                <div class="product-name">Personalized rings</div>
+                <div>Rs 4600</div>
+                <div class="product-icons">
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Personalized rings', 4600, 'https://i.pinimg.com/736x/9c/1a/f1/9c1af165630204b34c759a6c46a556af.jpg')"></span>
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Personalized rings', 'https://i.pinimg.com/736x/9c/1a/f1/9c1af165630204b34c759a6c46a556af.jpg')"></span>
+                </div>
+            </div>
+            <div class="product">
+                <img src="https://i.etsystatic.com/12080724/r/il/592f5a/2092249454/il_570xN.2092249454_bcjf.jpg" alt="Wedding Product 4">
+                <div class="product-name">Personalized Wedding Album</div>
+                <div>Rs 2200</div>
+                <div class="product-icons">
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Personalized Wedding Album', 2200, 'https://i.etsystatic.com/12080724/r/il/592f5a/2092249454/il_570xN.2092249454_bcjf.jpg')"></span>
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Personalized Wedding Album', 'https://i.etsystatic.com/12080724/r/il/592f5a/2092249454/il_570xN.2092249454_bcjf.jpg')"></span>
+                </div>
+            </div>
+            <div class="product">
+                <img src="https://cimages.personalcreations.com/is/image/planetartdmc/PCR22_18S486X_ENVIRO_DATE_SQ?$PCRProductImage$" alt="Wedding Product 5">
+                <div class="product-name">couple nameplate</div>
+                <div>Rs 1500</div>
+                <div class="product-icons">
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('couple nameplate', 1500, 'https://cimages.personalcreations.com/is/image/planetartdmc/PCR22_18S486X_ENVIRO_DATE_SQ?$PCRProductImage$')"></span>
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('couple nameplate', 'https://cimages.personalcreations.com/is/image/planetartdmc/PCR22_18S486X_ENVIRO_DATE_SQ?$PCRProductImage$')"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="Corporate" class="white-bar">
+        <div class="occasion-category">
+            <img src="https://cdn-icons-png.flaticon.com/128/10488/10488486.png" alt="Corporate Icon" class="icon">
+            Corporate
+        </div>
+        <div class="product-list">
+            <div class="product">
+                <img src="https://www.giftsmack.ca/cdn/shop/articles/Corporate_Gift_Ideas.png?v=1670631674" alt="Corporate Product 1">
+                <div class="product-name">Corporate gift hamper</div>
+                <div>Rs 2300</div>
+                <div class="product-icons">
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Corporate gift hamper', 2300, 'https://www.giftsmack.ca/cdn/shop/articles/Corporate_Gift_Ideas.png?v=1670631674')"></span>
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Corporate gift hamper', 'https://www.giftsmack.ca/cdn/shop/articles/Corporate_Gift_Ideas.png?v=1670631674')"></span>
+                </div>
+            </div>
+            <div class="product">
+                <img src="https://www.theblackboxco.com/cdn/shop/articles/SKY_3032.jpg?v=1691493272" alt="Corporate Product 2">
+                <div class="product-name">Personalized Diary</div>
+                <div>Rs 1200</div>
+                <div class="product-icons">
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Personalized Diary', 1200, 'https://www.theblackboxco.com/cdn/shop/articles/SKY_3032.jpg?v=1691493272')"></span>
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Personalized Diary', 'https://www.theblackboxco.com/cdn/shop/articles/SKY_3032.jpg?v=1691493272')"></span>
+                </div>
+            </div>
+            <div class="product">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQc_AYPZL9ywkpFYPvuwXK7NmEJvVoHlPiPAw&s" alt="Corporate Product 3">
+                <div class="product-name">Customized backpacks</div>
+                <div>Rs 2000</div>
+                <div class="product-icons">
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Customized backpacks', 2000, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQc_AYPZL9ywkpFYPvuwXK7NmEJvVoHlPiPAw&s')"></span>
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Customized backpacks', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQc_AYPZL9ywkpFYPvuwXK7NmEJvVoHlPiPAw&s')"></span>
+                </div>
+            </div>
+            <div class="product">
+                <img src="https://www.brandstik.com/images/products/whatsapp-image-2024-02-05-at-16-05-05-500x500%20(1)_300424103806.jpg" alt="Corporate Product 4">
+                <div class="product-name">Wooden power bank</div>
+                <div>Rs 900</div>
+                <div class="product-icons">
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Wooden power bank', 900, 'https://www.brandstik.com/images/products/whatsapp-image-2024-02-05-at-16-05-05-500x500%20(1)_300424103806.jpg')"></span>
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Wooden power bank', 'https://www.brandstik.com/images/products/whatsapp-image-2024-02-05-at-16-05-05-500x500%20(1)_300424103806.jpg')"></span>
+                </div>
+            </div>
+            <div class="product">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0zn_kvLB4j-31kwAfTE6AL3rIHBXYemKZjA&s" alt="Corporate Product 5">
+                <div class="product-name">Coffee Mug</div>
+                <div>Rs 760</div>
+                <div class="product-icons">
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Coffee Mug', 760, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0zn_kvLB4j-31kwAfTE6AL3rIHBXYemKZjA&s')"></span>
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Coffee Mug', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0zn_kvLB4j-31kwAfTE6AL3rIHBXYemKZjA&s')"></span>
+                </div>
+            </div>
+        </div>
+    </div><div id="Baby Shower" class="white-bar">
+        <div class="occasion-category">
+            <img src="https://cdn-icons-png.flaticon.com/128/6381/6381743.png" alt="Baby shower Icon" class="icon">
+            Baby Shower 
+        </div>
+        <div class="product-list">
+            <div class="product">
+                <img src="https://i.etsystatic.com/22757039/r/il/2cdd35/3649037048/il_570xN.3649037048_7ey2.jpg" alt="baby Product 1">
+                <div class="product-name">Baby gift basket</div>
+                <div>Rs 2500</div>
+                <div class="product-icons">
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Baby gift basket', 2500, 'https://i.etsystatic.com/22757039/r/il/2cdd35/3649037048/il_570xN.3649037048_7ey2.jpg')"></span>
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Baby gift basket', 'https://i.etsystatic.com/22757039/r/il/2cdd35/3649037048/il_570xN.3649037048_7ey2.jpg')"></span>
+                </div>
+            </div>
+            <div class="product">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRStIOUXJlvbljNiBi43iz7BnwvYVKohk3-xg&s" alt="baby Product 2">
+                <div class="product-name">Elephant soft toy</div>
+                <div>Rs 1300</div>
+                <div class="product-icons">
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Elephant soft toy', 1300, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRStIOUXJlvbljNiBi43iz7BnwvYVKohk3-xg&s')"></span>
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Elephant soft toy', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRStIOUXJlvbljNiBi43iz7BnwvYVKohk3-xg&s')"></span>
+                </div>
+            </div>
+            <div class="product">
+                <img src="https://i.etsystatic.com/34600528/r/il/589f97/4817923990/il_fullxfull.4817923990_fyda.jpg" alt="baby Product 3">
+                <div class="product-name">Personalized baby blankets</div>
+                <div>Rs 1500</div>
+                <div class="product-icons">
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Personalized baby blankets', 1500, 'https://i.etsystatic.com/34600528/r/il/589f97/4817923990/il_fullxfull.4817923990_fyda.jpg')"></span>
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Personalized baby blankets', 'https://i.etsystatic.com/34600528/r/il/589f97/4817923990/il_fullxfull.4817923990_fyda.jpg')"></span>
+                </div>
+            </div>
+            <div class="product">
+                <img src="https://images.uncommongoods.com/images/items/54300/54391_1_640px.webp" alt="baby Product 4">
+                <div class="product-name">Baby picturebook</div>
+                <div>Rs 600</div>
+                <div class="product-icons">
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Baby picturebook', 600, 'https://images.uncommongoods.com/images/items/54300/54391_1_640px.webp')"></span>
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Baby picturebook', 'https://images.uncommongoods.com/images/items/54300/54391_1_640px.webp')"></span>
+                </div>
+            </div>
+            <div class="product">
+                <img src="https://images.uncommongoods.com/images/items/58400/58429_1_640px.webp" alt="baby Product 5">
+                <div class="product-name">Baby footprint kit</div>
+                <div>Rs 1000</div>
+                <div class="product-icons">
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Baby footprint kit', 1000, 'https://images.uncommongoods.com/images/items/58400/58429_1_640px.webp')"></span>
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Baby footprint kit', 'https://images.uncommongoods.com/images/items/58400/58429_1_640px.webp')"></span>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div id="Housewarming" class="white-bar">
+            <div class="occasion-category">
+                <img src="https://cdn-icons-png.flaticon.com/128/2163/2163350.png" alt="Housewarming Icon" class="icon">
+                Housewarming
+            </div>
+            <div class="product-list">
+                <div class="product">
+                    <img src="https://cdn.shopify.com/s/files/1/2690/0106/products/SA702148_360x.jpg?v=1646226541" alt="house Product 1">
+                    <div class="product-name">Flower vase</div>
+                    <div>Rs 1400</div>
+                    <div class="product-icons">
+                        <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Flower vase', 1400, 'https://cdn.shopify.com/s/files/1/2690/0106/products/SA702148_360x.jpg?v=1646226541')"></span>
+                        <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Flower vase', 'https://cdn.shopify.com/s/files/1/2690/0106/products/SA702148_360x.jpg?v=1646226541')"></span>
+                    </div>
+                </div>
+                <div class="product">
+                    <img src="https://m.media-amazon.com/images/I/A1j0D1DpkXL.jpg" alt="house Product 2">
+                    <div class="product-name">Crockery set</div>
+                    <div>Rs 2800</div>
+                    <div class="product-icons">
+                        <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Crockery set', 2800, 'https://m.media-amazon.com/images/I/A1j0D1DpkXL.jpg')"></span>
+                        <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Crockery set', 'https://m.media-amazon.com/images/I/A1j0D1DpkXL.jpg')"></span>
+                    </div>
+                </div>
+                <div class="product">
+                    <img src="https://cdn.shopify.com/s/files/1/2690/0106/files/BeigeLanternsForHomeDecor_11_360x.jpg?v=1710934134" alt="house Product 3">
+                    <div class="product-name">Metal Lantern</div>
+                    <div>Rs 1100</div>
+                    <div class="product-icons">
+                        <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Metal Lantern', 1800, 'https://cdn.shopify.com/s/files/1/2690/0106/files/BeigeLanternsForHomeDecor_11_360x.jpg?v=1710934134')"></span>
+                        <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Metal Lantern', 'https://cdn.shopify.com/s/files/1/2690/0106/files/BeigeLanternsForHomeDecor_11_360x.jpg?v=1710934134')"></span>
+                    </div>
+                </div>
+                <div class="product">
+                    <img src="https://cdn.shopify.com/s/files/1/2690/0106/products/DSCF3197_360x.jpg?v=1674648081" alt="house Product 4">
+                    <div class="product-name">Wallart</div>
+                    <div>Rs 2000</div>
+                    <div class="product-icons">
+                        <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Wallart', 2000, 'https://cdn.shopify.com/s/files/1/2690/0106/products/DSCF3197_360x.jpg?v=1674648081')"></span>
+                        <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Wallart', 'https://cdn.shopify.com/s/files/1/2690/0106/products/DSCF3197_360x.jpg?v=1674648081')"></span>
+                    </div>
+                </div>
+                <div class="product">
+                    <img src="https://cdn.shopify.com/s/files/1/2690/0106/products/DSCF9604_ec758144-edae-4f86-9197-6f30fa7b52bc_360x.jpg?v=1672833763" alt="house Product 5">
+                    <div class="product-name">Decorative wall mirror</div>
+                    <div>Rs 3200</div>
+                    <div class="product-icons">
+                        <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Decorative wall mirror', 3200, 'https://cdn.shopify.com/s/files/1/2690/0106/products/DSCF9604_ec758144-edae-4f86-9197-6f30fa7b52bc_360x.jpg?v=1672833763')"></span>
+                        <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Decorative wall mirror', 'https://cdn.shopify.com/s/files/1/2690/0106/products/DSCF9604_ec758144-edae-4f86-9197-6f30fa7b52bc_360x.jpg?v=1672833763')"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div id="Farewell" class="white-bar">
+                <div class="occasion-category">
+                    <img src="https://cdn-icons-png.flaticon.com/128/4138/4138750.png" alt="farewell Icon" class="icon">
+                    Farewell
+                </div>
+                <div class="product-list">
+                    <div class="product">
+                        <img src="https://marigoldgrey.com/cdn/shop/articles/corporate_farewell_gifts_800x.jpg?v=1654108158" alt="farewell Product 1">
+                        <div class="product-name">Farewell gift box</div>
+                        <div>Rs 2000</div>
+                        <div class="product-icons">
+                            <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Farewell gift box', 2000, 'https://marigoldgrey.com/cdn/shop/articles/corporate_farewell_gifts_800x.jpg?v=1654108158')"></span>
+                            <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Farewell gift box', 'https://marigoldgrey.com/cdn/shop/articles/corporate_farewell_gifts_800x.jpg?v=1654108158')"></span>
+                        </div>
+                    </div>
+                    <div class="product">
+                        <img src="https://cdn.thisiswhyimbroke.com/buying-guides-thumb/86/these-people-are-going-to-miss-you-frame_400x.jpg" alt="farewell Product 2">
+                        <div class="product-name">Miss you frame</div>
+                        <div>Rs 1200</div>
+                        <div class="product-icons">
+                            <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Miss you frame', 1200, 'https://cdn.thisiswhyimbroke.com/buying-guides-thumb/86/these-people-are-going-to-miss-you-frame_400x.jpg')"></span>
+                            <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Miss you frame', 'https://cdn.thisiswhyimbroke.com/buying-guides-thumb/86/these-people-are-going-to-miss-you-frame_400x.jpg')"></span>
+                        </div>
+                    </div>
+                    <div class="product">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1O8qMp_cMzXFzOKuqJ4V69d4xAq5BpPQHkQ&s" alt="farewell Product 3">
+                        <div class="product-name">Farewell tumbler</div>
+                        <div>Rs 800</div>
+                        <div class="product-icons">
+                            <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Farewell tumbler', 800, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1O8qMp_cMzXFzOKuqJ4V69d4xAq5BpPQHkQ&s')"></span>
+                            <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Farewell tumbler', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1O8qMp_cMzXFzOKuqJ4V69d4xAq5BpPQHkQ&s')"></span>
+                        </div>
+                    </div>
+                    <div class="product">
+                        <img src="https://i.etsystatic.com/20571608/r/il/ac5b4b/3184059241/il_794xN.3184059241_4tnj.jpg" alt="farewell Product 4">
+                        <div class="product-name">neckpiece with message</div>
+                        <div>Rs 1300</div>
+                        <div class="product-icons">
+                            <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('neckpiece with message', 1300, 'https://i.etsystatic.com/20571608/r/il/ac5b4b/3184059241/il_794xN.3184059241_4tnj.jpg')"></span>
+                            <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('neckpiece with message', 'https://i.etsystatic.com/20571608/r/il/ac5b4b/3184059241/il_794xN.3184059241_4tnj.jpg')"></span>
+                        </div>
+                    </div>
+                    <div class="product">
+                        <img src="https://i.ebayimg.com/images/g/n1gAAOSwxs9jxLW6/s-l1200.webp" alt="farewell Product 5">
+                        <div class="product-name">Customized message mug</div>
+                        <div>Rs 1200</div>
+                        <div class="product-icons">
+                            <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Customized message mug', 1200, 'https://i.ebayimg.com/images/g/n1gAAOSwxs9jxLW6/s-l1200.webp')"></span>
+                            <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Customized message mug', 'https://i.ebayimg.com/images/g/n1gAAOSwxs9jxLW6/s-l1200.webp')"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div id="Festivities" class="white-bar">
+                    <div class="occasion-category">
+                        <img src="https://cdn-icons-png.flaticon.com/128/2071/2071392.png" alt="festive Icon" class="icon">
+                        Festivities
+                    </div>
+                    <div class="product-list">
+                        <div class="product">
+                            <img src="https://www.magikelf.com/cdn/shop/products/12_800x800.jpg?v=1634040984" alt="festive Product 1">
+                            <div class="product-name">festive gift box</div>
+                            <div>Rs 1800</div>
+                            <div class="product-icons">
+                                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('festive gift box', 1800, 'https://www.magikelf.com/cdn/shop/products/12_800x800.jpg?v=1634040984')"></span>
+                                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('festive gift box', 'https://www.magikelf.com/cdn/shop/products/12_800x800.jpg?v=1634040984')"></span>
+                            </div>
+                        </div>
+                        <div class="product">
+                            <img src="https://www.loopify.world/media/catalog/product/cache/dbe2529ab2406544782db7656640aa6b/d/s/dsc_1331_website_2k_2k_.jpg" alt="festive Product 2">
+                            <div class="product-name">festive hamper</div>
+                            <div>Rs 2200</div>
+                            <div class="product-icons">
+                                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('festive hamper', 2200, 'https://www.loopify.world/media/catalog/product/cache/dbe2529ab2406544782db7656640aa6b/d/s/dsc_1331_website_2k_2k_.jpg')"></span>
+                                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('festive hamper', 'https://www.loopify.world/media/catalog/product/cache/dbe2529ab2406544782db7656640aa6b/d/s/dsc_1331_website_2k_2k_.jpg')"></span>
+                            </div>
+                        </div>
+                        <div class="product">
+                            <img src="https://images.uncommongoods.com/images/items/59200/59285_1_640px.webp" alt="festive Product 3">
+                            <div class="product-name">Rose candles</div>
+                            <div>Rs 1000</div>
+                            <div class="product-icons">
+                                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Rose candles', 1000, 'https://images.uncommongoods.com/images/items/59200/59285_1_640px.webp')"></span>
+                                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Rose candles', 'https://images.uncommongoods.com/images/items/59200/59285_1_640px.webp')"></span>
+                            </div>
+                        </div>
+                        <div class="product">
+                            <img src="https://images.uncommongoods.com/images/items/53900/53950_2_640px.webp" alt="festive Product 4">
+                            <div class="product-name">salsa turtles</div>
+                            <div>Rs 2000</div>
+                            <div class="product-icons">
+                                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('salsa turtles', 2000, 'https://images.uncommongoods.com/images/items/53900/53950_2_640px.webp')"></span>
+                                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('salsa turtles', 'https://images.uncommongoods.com/images/items/53900/53950_2_640px.webp')"></span>
+                            </div>
+                        </div>
+                        <div class="product">
+                            <img src="https://assets.winni.in/product/primary/2022/11/78451.jpeg?dpr=1&w=400" alt="festive Product 5">
+                            <div class="product-name">Truffle Chocolate box</div>
+                            <div>Rs 500</div>
+                            <div class="product-icons">
+                                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Truffle Chocolate box', 500, 'https://assets.winni.in/product/primary/2022/11/78451.jpeg?dpr=1&w=400')"></span>
+                                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Truffle Chocolate box', 'https://assets.winni.in/product/primary/2022/11/78451.jpeg?dpr=1&w=400')"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="More Gifts" class="white-bar">
+                    <div class="occasion-category">
+                        <img src="https://cdn-icons-png.flaticon.com/128/2349/2349820.png" alt="more Icon" class="icon">
+                        More Gifts
+                    </div>
+                    <div class="product-list">
+                        <div class="product">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUmVWwiaIHytiWcw6jOTKt4Z4Eu6cX93-MPg&s" alt="more Product 1">
+                            <div class="product-name">cakes</div>
+                            <div>Rs 900</div>
+                            <div class="product-icons">
+                                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('cakes', 900, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUmVWwiaIHytiWcw6jOTKt4Z4Eu6cX93-MPg&s')"></span>
+                                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('cakes', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUmVWwiaIHytiWcw6jOTKt4Z4Eu6cX93-MPg&s')"></span>
+                            </div>
+                        </div>
+                        <div class="product">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnP80qCytxul4d2Bma1JU1BmCM-mEviOljZg&s" alt="festive Product 2">
+                            <div class="product-name">flower bouquets</div>
+                            <div>Rs 660</div>
+                            <div class="product-icons">
+                                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('flower bouquets', 660, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnP80qCytxul4d2Bma1JU1BmCM-mEviOljZg&s')"></span>
+                                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('flower bouquets', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnP80qCytxul4d2Bma1JU1BmCM-mEviOljZg&s')"></span>
+                            </div>
+                        </div>
+                        <div class="product">
+                            <img src="https://cimages.personalcreations.com/is/image/planetartdmc/PCR20_19S168X_NEW_ENVIRO_EDITED_SQ?$PCRProductImage$" alt="more Product 3">
+                            <div class="product-name">personalized tumblers</div>
+                            <div>Rs 850</div>
+                            <div class="product-icons">
+                                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('personalized tumblers', 850, 'https://cimages.personalcreations.com/is/image/planetartdmc/PCR20_19S168X_NEW_ENVIRO_EDITED_SQ?$PCRProductImage$')"></span>
+                                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('personalized tumblers', 'https://cimages.personalcreations.com/is/image/planetartdmc/PCR20_19S168X_NEW_ENVIRO_EDITED_SQ?$PCRProductImage$')"></span>
+                            </div>
+                        </div>
+                        <div class="product">
+                            <img src="https://cimages.personalcreations.com/is/image/planetartdmc/RED20_20REH47X_WDR_EDITED_SQ?$PCRProductImage$" alt="more Product 4">
+                            <div class="product-name">leather keychains</div>
+                            <div>Rs 600</div>
+                            <div class="product-icons">
+                                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('leather keychains', 600, 'https://cimages.personalcreations.com/is/image/planetartdmc/RED20_20REH47X_WDR_EDITED_SQ?$PCRProductImage$')"></span>
+                                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('leather keychains', 'https://cimages.personalcreations.com/is/image/planetartdmc/RED20_20REH47X_WDR_EDITED_SQ?$PCRProductImage$')"></span>
+                            </div>
+                        </div>
+                        <div class="product">
+                            <img src="https://cimages.personalcreations.com/is/image/planetartdmc/RED19_20REP11X_WDR_CP_SQ?$PCRProductImage$" alt="more Product 5">
+                            <div class="product-name">Travel pouch set</div>
+                            <div>Rs 920</div>
+                            <div class="product-icons">
+                                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Travel pouch set', 920, 'https://cimages.personalcreations.com/is/image/planetartdmc/RED19_20REP11X_WDR_CP_SQ?$PCRProductImage$')"></span>
+                                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Travel pouch set', 'https://cimages.personalcreations.com/is/image/planetartdmc/RED19_20REP11X_WDR_CP_SQ?$PCRProductImage$')"></span>
+                            </div>
+                        </div>
+                    </div>
+
+
+        
+    
+
+    <div class="sidebar" id="sidebar">
+        <a href="#Birthdays">Birthdays</a>
+        <a href="#Anniversaries">Anniversaries</a>
+        <a href="#Weddings">Weddings</a>
+        <a href="#Corporate">Corporate</a>
+        <a href="#Baby Shower">Baby Shower</a>
+        <a href="#Housewarming">Housewarming</a>
+        <a href="#Farewell">Farewell</a>
+        <a href="#Festivities">Festivities</a>
+        <a href="#More Gifts">More Gifts</a>
+        <button class="close-button" onclick="toggleSidebar()">Close Sidebar</button>
+    </div>
+    <!-- JavaScript for toggling sidebar -->
+    <script>
+        const sidebar = document.getElementById('sidebar');
+
+        function toggleSidebar() {
+            sidebar.classList.toggle('open'); // Toggle 'open' class to slide sidebar in/out
+        }
+    </script>
+    <script>
+        function addToCart(productName, productPrice, productImage) {
+            // Example: Store product in local storage for demo purposes
+            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            cartItems.push({ name: productName, price: productPrice, image: productImage });
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        
+            // Redirect to cart.html
+            window.location.href = 'wishcart/cart.html';
+        }
+        function addToWishlist(productName, productImage) {
+        // Example: Store product in local storage for demo purposes
+        let wishlistItems = JSON.parse(localStorage.getItem('wishlistItems')) || [];
+        wishlistItems.push({ name: productName, image: productImage });
+        localStorage.setItem('wishlistItems', JSON.stringify(wishlistItems));
+    
+        // Redirect to wishlist.html
+        window.location.href = 'wishcart/wishlist.html';
+    }
+        </script>
+    <div class="footer">
+        <div class="footer-text">2024 PresentPerfect.com - All rights reserved. &nbsp; Made with the purpose of a project competition. &nbsp; Estd. in 2024 by some students of Fr. Conceicao Rodrigues Institute of Technology. &nbsp; Refunds not accepted. &nbsp; For any enquiry, contact 0123456789.</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ART - PresentPerfect.com</title>
+    <style>
+        body {
+            font-family: Calibri, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-image: url('https://img.freepik.com/free-photo/brush-pink-stroke_23-2147746686.jpg?t=st=1720421944~exp=1720425544~hmac=6b5a7627ef3a96e8a8802e5ee147cc343a4606192bef05967bd1d4b385394a8c&w=1060');
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .bar {
+            background-color: #496590;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .bar h1 {
+            color: black;
+            margin: 0;
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        .back-button {
+            font-size: 1em;
+            text-decoration: none;
+            color: pink;
+            border: 2px solid pink;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            position: absolute;
+            left: 10px;
+        }
+
+        .back-button:hover {
+            background-color: #c137a2;
+            color: white;
+        }
+
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content:space-around;
+            padding: 10px;
+            width: 600px;
+            height: 600px;
+            margin-left: 650px;
+        }
+
+        .product {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin: 10px;
+            width: 40%;
+            text-align: center;
+            padding: 7px;
+            transition: transform 0.3s;
+        }
+
+        .product img {
+            max-width: 60%;
+            border-radius: 10px;
+        }
+
+        .product:hover {
+            transform: scale(1.05);
+        }
+
+        .product-name {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        .cart-icon, .favorite-icon {
+    width: 20px; /* Adjust the size as per your preference */
+    height: 20px;
+}
+    </style>
+</head>
+<body>
+    <div class="bar">
+        <a href="interests.html" class="back-button">Back</a>
+        <h1>ART</h1>
+    </div>
+    <div class="products">
+        <div class="product">
+            <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSDPpeh4B4qOaIaZhatRkMG1aUSSghw25yAYVIqCiv6h5D6zfuliGGPMxnEziw6ChIUCDOjqRCK2WbEnQevAoxlHrNZoG46LQrIM0cmKGBJWCq0rY_ti8vaSA&usqp=CAE" alt="Product 1">
+            <div class="product-name 1">Modern art Wall painting</div>
+            <div>Rs 3000</div>
+            <div class="product-icons">
+                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Modern art Wall painting', 3000, 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSDPpeh4B4qOaIaZhatRkMG1aUSSghw25yAYVIqCiv6h5D6zfuliGGPMxnEziw6ChIUCDOjqRCK2WbEnQevAoxlHrNZoG46LQrIM0cmKGBJWCq0rY_ti8vaSA&usqp=CAE')"></span>
+                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Modern art Wall painting', 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSDPpeh4B4qOaIaZhatRkMG1aUSSghw25yAYVIqCiv6h5D6zfuliGGPMxnEziw6ChIUCDOjqRCK2WbEnQevAoxlHrNZoG46LQrIM0cmKGBJWCq0rY_ti8vaSA&usqp=CAE')"></span>
+            </div>
+        </div>
+        <div class="product">
+            <img src="https://m.media-amazon.com/images/I/91RSM-YUq-L._AC_UL480_FMwebp_QL65_.jpg" alt="Product 2">
+            <div class="product-name">Art kit</div>
+            <div>Rs 1700</div>
+            <div class="product-icons">
+                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Art kit', 1700, 'https://m.media-amazon.com/images/I/91RSM-YUq-L._AC_UL480_FMwebp_QL65_.jpg')"></span>
+                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Art kit', 'https://m.media-amazon.com/images/I/91RSM-YUq-L._AC_UL480_FMwebp_QL65_.jpg')"></span>
+            </div>
+        </div>
+        <div class="product">
+            <img src="https://assets.vogue.com/photos/5beda05bae1b4b2dd8d60e4b/master/w_1600,c_limit/market_slide_3.jpg" alt="Product 3">
+            <div class="product-name">Customized Journal</div>
+            <div>Rs 1200</div>
+            <div class="product-icons">
+                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Customized Journal', 1200, 'https://assets.vogue.com/photos/5beda05bae1b4b2dd8d60e4b/master/w_1600,c_limit/market_slide_3.jpg')"></span>
+                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Customized Journal', 'https://assets.vogue.com/photos/5beda05bae1b4b2dd8d60e4b/master/w_1600,c_limit/market_slide_3.jpg')"></span>
+            </div>
+        </div>
+        <div class="product">
+            <img src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1659969435-gifts-for-artist-drawing-board-1659969418.jpg?crop=0.921xw:1.00xh;0.0785xw,0&resize=980:*" alt="Product 4">
+            <div class="product-name">Inkless Drawing board</div>
+            <div>Rs 3000</div>
+            <div class="product-icons">
+                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Inkless Drawing board', 3000, 'https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1659969435-gifts-for-artist-drawing-board-1659969418.jpg?crop=0.921xw:1.00xh;0.0785xw,0&resize=980:*')"></span>
+                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Inkless Drawing board', 'https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1659969435-gifts-for-artist-drawing-board-1659969418.jpg?crop=0.921xw:1.00xh;0.0785xw,0&resize=980:*')"></span>
+            </div>
+        </div>
+        <div class="product">
+            <img src="https://i.etsystatic.com/7219352/c/1769/1769/226/0/il/c1e7ef/5007153569/il_600x600.5007153569_6lul.jpg" alt="Product 5">
+            <div class="product-name">Personalized palette paint Keychain</div>
+            <div>Rs 600</div>
+            <div class="product-icons">
+                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Personalized palette paint Keychain', 600, 'https://i.etsystatic.com/7219352/c/1769/1769/226/0/il/c1e7ef/5007153569/il_600x600.5007153569_6lul.jpg')"></span>
+                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Personalized palette paint Keychain', 'https://i.etsystatic.com/7219352/c/1769/1769/226/0/il/c1e7ef/5007153569/il_600x600.5007153569_6lul.jpg')"></span>
+            </div>
+        </div>
+        <div class="product">
+            <img src="https://i.etsystatic.com/51385640/r/il/3c870f/5912343776/il_600x600.5912343776_sxf7.jpg" alt="Product 6">
+            <div class="product-name">Art Tote bag</div>
+            <div>Rs 800</div>
+            <div class="product-icons">
+                <span><img src="https://cdn-icons-png.flaticon.com/128/891/891407.png" alt="Add to Cart" title="Add to Cart" class="cart-icon" onclick="addToCart('Art Tote bag', 800, 'https://i.etsystatic.com/51385640/r/il/3c870f/5912343776/il_600x600.5912343776_sxf7.jpg')"></span>
+                <span><img src="https://cdn-icons-png.flaticon.com/128/4340/4340223.png" alt="Add to Favorites" title="Add to Favorites" class="favorite-icon" onclick="addToWishlist('Art Tote bag', 'https://i.etsystatic.com/51385640/r/il/3c870f/5912343776/il_600x600.5912343776_sxf7.jpg')"></span>
+            </div>
+        </div>
+    </div>
+    <script>
+        function addToCart(productName, productPrice, productImage) {
+            // Example: Store product in local storage for demo purposes
+            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            cartItems.push({ name: productName, price: productPrice, image: productImage });
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        
+            // Redirect to cart.html
+            window.location.href = 'wishcart/cart.html';
+        }
+        function addToWishlist(productName, productImage) {
+        // Example: Store product in local storage for demo purposes
+        let wishlistItems = JSON.parse(localStorage.getItem('wishlistItems')) || [];
+        wishlistItems.push({ name: productName, image: productImage });
+        localStorage.setItem('wishlistItems', JSON.stringify(wishlistItems));
+    
+        // Redirect to wishlist.html
+        window.location.href = 'wishcart/wishlist.html';
+    }
+    </script>
+</body>
+</html>

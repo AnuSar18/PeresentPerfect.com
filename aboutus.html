@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.freepik.com/256/11388/11388305.png?ga=GA1.1.21737363.1711112647&semt=ais_hybrid">
+    <style>
+        body {
+            font-family: Calibri, Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 10px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .logo {
+            color: #d648b3;
+            font-size: 47px;
+            font-weight: bold;
+            font-family: 'Segoe Script', sans-serif;
+            margin-bottom: 5px;
+            margin-top: 10px;
+        }
+        .tagline {
+            font-size: 21px;
+            margin-bottom: 10px;
+            color: #0f0e0f;
+            text-align: center;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            margin-top: -140px; /* Adjusted margin for alignment */
+        }
+        .nav-item {
+            text-align: center;
+            margin-left: 20px;
+        }
+        .nav-item a {
+            text-decoration: none;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 12px;
+        }
+        .nav-item img {
+            width: 32px;
+            height: 32px;
+            margin-bottom: 5px;
+        }
+        .about-us {
+            width: 100%;
+            background-color: #fff;
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .about-us-title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .about-us-content {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .about-us-text {
+            font-size: 18px;
+            color: #555;
+            line-height: 1.6;
+            text-align: left;
+            max-width: 600px;
+        }
+        .about-us-image {
+            max-width: 400px;
+        }
+        .about-us-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #496590;
+            color: #e4d7d7;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            z-index: 1000;
+        }
+        @keyframes slideFooter {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        .footer-text {
+            display: inline-block;
+            padding-left: 100%;
+            animation: slideFooter 55s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="startpg.html" class="back-button">Back</a>
+        <div class="logo">PresentPerfect.com</div>
+        <div class="header">
+            <div class="tagline">Presenting Ourselves to you!</div>
+        </div>
+        <div class="about-us">
+            <div class="about-us-title">About Us</div>
+            <div class="about-us-content">
+                <div class="about-us-text">
+                    Welcome to PresentPerfect.com, your one-stop destination for perfect gifts for every occasion. Established in 2024 by a group of passionate students from Fr. Conceicao Rodrigues Institute of Technology, we strive to offer a wide range of personalized, high-quality gifts that bring joy to both the giver and the receiver.
+                    <br><br>
+                    Our mission is to make gift-giving an easy and delightful experience. We believe in the power of thoughtful presents to create lasting memories and strengthen relationships. Whether you're looking for a gift for her, for him, for kids, or best-selling gifts, we have something special for everyone.
+                    <br><br>
+                    Thank you for choosing PresentPerfect.com. We are committed to providing excellent customer service and ensuring your satisfaction with every purchase.
+                </div>
+                <div class="about-us-image">
+                    <img src="https://png.pngtree.com/png-vector/20231027/ourmid/pngtree-a-young-male-person-opens-red-present-box-on-christmas-png-image_10345533.png" alt="About Us Image">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer-text">2024 PresentPerfect.com - All rights reserved. &nbsp; Made with the purpose of a project competition. &nbsp; Estd. in 2024 by some students of Fr. Conceicao Rodrigues Institute of Technology. &nbsp; Refunds not accepted. &nbsp; For any enquiry, contact 0123456789.</div>
+    </div>
+</body>
+</html>
