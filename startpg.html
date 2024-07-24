@@ -372,6 +372,30 @@
     width: 20px !important;
     height: 20px !important;
 }
+#popup-message {
+            position: fixed;
+            bottom: 50px;
+            right: 20px;
+            background-color: #d648b3;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        #popup-message span {
+            flex-grow: 1;
+        }
+        #close-popup {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
 
 
 /* Footer styles */
@@ -411,9 +435,9 @@
             <div style="margin-top: -140px;"><img src="https://cdn-icons-png.freepik.com/256/11388/11388305.png?ga=GA1.1.21737363.1711112647&semt=ais_hybrid" alt="Website Icon" width="140"></div>
             <div class="nav-links">
                 <div class="nav-item"><a href="signin.html"><img src="https://cdn-icons-png.freepik.com/256/16718/16718330.png?ga=GA1.1.21737363.1711112647&semt=ais_hybrid" alt="Sign In" width="10"> Sign In</a></div>
-                <div class="nav-item"><a href="wishcart\wishlist.html"><img src="https://cdn-icons-png.freepik.com/256/9460/9460292.png?ga=GA1.1.21737363.1711112647&semt=ais_hybrid" alt="Wishlist"> Wishlist</a></div>
-                <div class="nav-item"><a href="gf\giftfinder.html"><img src="https://cdn-icons-png.freepik.com/256/9118/9118147.png?ga=GA1.1.21737363.1711112647&semt=ais_hybrid" alt="Gift Finder"> Gift Finder</a></div>
-                <div class="nav-item"><a href="wishcart\cart.html"><img src="https://cdn-icons-png.freepik.com/256/6337/6337186.png?ga=GA1.1.21737363.1711112647&semt=ais_hybrid" alt="Cart"> Cart</a></div>
+                <div class="nav-item"><a href="wishlist.html"><img src="https://cdn-icons-png.freepik.com/256/9460/9460292.png?ga=GA1.1.21737363.1711112647&semt=ais_hybrid" alt="Wishlist"> Wishlist</a></div>
+                <div class="nav-item"><a href="giftfinder.html"><img src="https://cdn-icons-png.freepik.com/256/9118/9118147.png?ga=GA1.1.21737363.1711112647&semt=ais_hybrid" alt="Gift Finder"> Gift Finder</a></div>
+                <div class="nav-item"><a href="cart.html"><img src="https://cdn-icons-png.freepik.com/256/6337/6337186.png?ga=GA1.1.21737363.1711112647&semt=ais_hybrid" alt="Cart"> Cart</a></div>
             </div>
         </div>
         
@@ -590,6 +614,10 @@
                         <div>Free Customization</div>
                     </div>
          </div>
+         <div id="popup-message">
+            <span>Hi, how may I help you?</span>
+            <button id="close-popup">&times;</button>
+        </div>
 
         <script>
             var slideIndex = 0;
@@ -685,11 +713,37 @@
             "birthday gifts": "occasions.html",
             "anniversary gifts": "occasions.html",
             "wedding gifts": "occasions.html",
-            "festive gifts": "occasions.html", 
+            "festive gifts": "occasions.html",
+
+
+
+            
+            
+            
+            
         };
         return products[query];
     }
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const popupMessage = document.getElementById('popup-message');
+        const closePopup = document.getElementById('close-popup');
+
+        // Close the popup message when the close button is clicked
+        closePopup.addEventListener('click', function(event) {
+            event.stopPropagation(); // Prevent triggering the click event on the popup message
+            popupMessage.style.display = 'none';
+        });
+
+        // Open chatbot.html when the popup message is clicked
+        popupMessage.addEventListener('click', function() {
+            window.location.href = 'chatbot.html';
+        });
+    });
+</script>
+</body>
+</html>
         <div class="footer">
             <div class="footer-text">2024 PresentPerfect.com - All rights reserved. &nbsp; Made with the purpose of a project competition. &nbsp; Estd. in 2024 by some students of Fr. Conceicao Rodrigues Institute of Technology. &nbsp; Refunds not accepted. &nbsp; For any enquiry, contact 0123456789.</div>
         </div>
