@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://img.freepik.com/free-photo/gift-holded-by-hand_23-2148123039.jpg?w=1060&t=st=1721825364~exp=1721825964~hmac=ad5b89fe4af3baef5f8ad6b5f6da24671d8eb2a75410e696e151764299f31bc2'); /* Replace with your image path */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        #chatbot-container {
+            width: 500px;
+            height: 500px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-left: 160px;
+        }
+        #chatbot-container h2 {
+            margin: 0 0 10px;
+            color: #333;
+        }
+        #chatlog {
+            border: 1px solid #ccc;
+            padding: 10px;
+            height: 150px;
+            overflow-y: auto;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        #user-input {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        #send-button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+        #send-button:hover {
+            background-color: #0056b3;
+        }
+        #back-button {
+            width: 12%;
+            padding: 6px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            margin-left: -445px;
+        }
+        #back-button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div id="chatbot-container">
+        <button id="back-button">Back </button>
+        <h2>Here to answer your questions</h2>
+        <div id="chatlog"></div>
+        <input type="text" id="user-input" placeholder="Type your message here...">
+        <button id="send-button">Send</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sendButton = document.getElementById('send-button');
+            const userInput = document.getElementById('user-input');
+            const chatlog = document.getElementById('chatlog');
+            const backButton = document.getElementById('back-button');
+
+            const questionsAnswers = {
+                "How can I contact customer support": "You can contact our customer support team via email at support@presentperfect.com.",
+                "What types of gifts do you offer": "We offer a wide range of gifts including personalized jewelry, scented candles, home decor items, and more. Our collections are curated for various occasions such as birthdays, anniversaries, and weddings and more.",
+                "What payment methods do you accept": "we accept various payment options like razorpay,cash payment,credit card and more options available.",
+                "What is your return policy": "You can return any item within 30 days of purchase.",
+                "Can I use multiple discount codes on a single order": "Generally, only one discount code can be applied per order. Please check the terms of each promotion for specific details.",
+                "How can I contact customer service": "You can contact our customer service at (123) 456-7890."
+            };
+
+            // Send message when send button is clicked
+            sendButton.addEventListener('click', function() {
+                const message = userInput.value.trim();
+                if (message) {
+                    addMessage(`You: ${message}`, 'user');
+                    userInput.value = '';
+
+                    const response = questionsAnswers[message] || "Sorry, I don't understand that question.";
+                    addMessage(`Bot: ${response}`, 'bot');
+                }
+            });
+
+            // Function to append messages to chat log
+            function addMessage(message, sender) {
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('chat-message', sender);
+                messageElement.textContent = message;
+                chatlog.appendChild(messageElement);
+                chatlog.scrollTop = chatlog.scrollHeight;
+            }
+
+            // Redirect to start page when back button is clicked
+            backButton.addEventListener('click', function() {
+                window.location.href = 'startpg.html';
+            });
+        });
+    </script>
+</body>
+</html>
